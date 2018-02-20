@@ -16,7 +16,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ##### Push production build to `gh-pages` #####
 Install [angular-cli-ghpages](https://github.com/angular-schule/angular-cli-ghpages) by running the `npm i -g angular-cli-ghpages` command
-run `ng build --prod --base-href http://yaronmiro.github.io/yna/ && ngh`
+run `ng build --prod --base-href https://yaronmiro.github.io/yna/ && ngh`
 
 
 <!-- ## Running unit tests

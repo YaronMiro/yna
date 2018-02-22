@@ -2,6 +2,10 @@
 
 .main__header
     padding: 15px
-    color: $white
+    color: $title
+    text-align: center
     font-size: 2em
-    +gradient-background() 
+    +gradient-background()
+
+    +respond-at($breakpoint-desktop)
+        text-align: left

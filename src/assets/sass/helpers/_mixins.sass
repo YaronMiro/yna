@@ -1,0 +1,8 @@
+// Creates @media breakpoints
+=respond-at($media)
+  @media (min-width: $media)
+    @content
+
+// Adds a green gradient background.
+=gradient-background($direction: right)
+  background: linear-gradient(to $direction, $green-start, $green-end)

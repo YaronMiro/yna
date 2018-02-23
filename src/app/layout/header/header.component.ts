@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
     this._title = 'ShoppingList';
   }
 
-  get title() {
+  get title(): string {
     return this._title;
 
   }

@@ -13,9 +13,13 @@ export class HeaderComponent implements OnInit {
     this._title = 'ShoppingList';
   }
 
+  /**
+   * Get the header component title.
+   *
+   * @return string
+   */
   get title(): string {
     return this._title;
-
   }
 
   ngOnInit() {

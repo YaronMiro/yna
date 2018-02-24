@@ -21,20 +21,29 @@
     padding: .75rem 0 0
     border-top: $border-base-style
 
-.products__list__item
+.products__list__product
     padding: 5px 10px
     border-bottom: $border-base-style
 
     &:last-child
         border-bottom: 0
 
-.item__check__btn
+.product__check__btn
     +reset-button-style()
     margin-right: .25rem
     vertical-align: middle
     cursor: pointer
 
-.item__title__field
+.product__checked__title
+    display: inline-block
+    width: 87%
+    color: $light-text
+    text:
+        // decoration: line-through
+        decoration-color: $text
+        transform: capitalize
+
+.product__title__field
     width: 87%
     border: 0
     color: $light-text
@@ -44,19 +53,12 @@
         outline: 0
         color: $text
 
-    &.checked
-        text-decoration: line-through
-        text-decoration-color: $text
-
-    &:disabled
-        background: transparent
-
-.item__delete__btn
+.product__delete__btn
     +reset-button-style()
     color: $danger
     vertical-align: middle
 
-.add__new__item__field
+.add__new__product__field
     +reset-button-style()
     width: 100%
     padding: 5px 0 5px 30px

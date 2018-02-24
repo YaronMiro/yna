@@ -1,6 +1,7 @@
 @import '~assets/sass/helpers/style'
 
 .products
+    margin: 0 auto
     max-width: 300px
     border: $border-base-style
 
@@ -41,10 +42,14 @@
 
     &:focus
         outline: 0
+        color: $text
 
     &.checked
         text-decoration: line-through
         text-decoration-color: $text
+
+    &:disabled
+        background: transparent
 
 .item__delete__btn
     +reset-button-style()

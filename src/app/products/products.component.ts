@@ -10,6 +10,8 @@ export class ProductsComponent implements OnInit {
 
   private _title: string;
 
+  private _addItemTitle: string;
+
   newProduct: Product =
     {
       id: null,
@@ -35,6 +37,7 @@ export class ProductsComponent implements OnInit {
 
   constructor() {
     this._title = 'add your item here';
+    this._addItemTitle = 'add item';
   }
 
   /**
@@ -47,6 +50,25 @@ export class ProductsComponent implements OnInit {
   }
 
   /**
+   * Get the "add item" title text.
+   *
+   * @return string
+   */
+  get addItemTitle(): string {
+    return this._addItemTitle;
+  }
+
+  /**
+   * Set the "add item" title text.
+   *
+   * @param title: the add item title.
+   * @return void
+   */
+  set addItemTitle(title: string) {
+    this._addItemTitle = title;
+  }
+
+  /**
   * Delete product from the list.
   *
   * @param id: the product ID.
@@ -56,6 +78,33 @@ export class ProductsComponent implements OnInit {
     this.products = this.products.filter(
       (product) => product.id !== id
     );
+  }
+
+  /**
+  * Delete product from the list.
+  *
+  * @param id: the product ID.
+  * @return void
+  */
+  add(item: Product): void {
+
+    const newProduct: Product = {
+      id: 3,
+      title: item.title,
+      isChecked: false,
+    };
+
+    this.products.push(newProduct);
+    // reset the "Add item" title.
+
+    this.newProduct = {
+      id: null,
+      title: null,
+      isChecked: false,
+    };
+
+    this.addItemTitle = 'Add item';
+
   }
 
   ngOnInit() {

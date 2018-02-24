@@ -10,8 +10,6 @@ export class ProductsComponent implements OnInit {
 
   private _title: string;
 
-  private _addItemTitle: string;
-
   newProduct: Product =
     {
       id: null,
@@ -22,22 +20,18 @@ export class ProductsComponent implements OnInit {
   products: Product[] = [
     {
       id: 1,
-      title: 'milk',
-      isChecked: false,
-      quantity: 1, price: '25 Nis',
-      description: 'some text about product'
+      title: 'chips',
+      isChecked: true,
     },
     {
       id: 2,
-      title: 'bread',
-      isChecked: true,
-      quantity: 2
+      title: 'cockie',
+      isChecked: false,
     }
   ];
 
   constructor() {
     this._title = 'add your item here';
-    this._addItemTitle = 'add item';
   }
 
   /**
@@ -50,23 +44,12 @@ export class ProductsComponent implements OnInit {
   }
 
   /**
-   * Get the "add item" title text.
-   *
-   * @return string
-   */
-  get addItemTitle(): string {
-    return this._addItemTitle;
-  }
-
-  /**
-   * Set the "add item" title text.
-   *
-   * @param title: the add item title.
-   * @return void
-   */
-  set addItemTitle(title: string) {
-    this._addItemTitle = title;
-  }
+  * Toggle the product "checked" status.
+  *
+  * @param item: the product data fields.
+  * @return void
+  */
+  toggleCheckedStatus(item: Product): void {}
 
   /**
   * Delete product from the list.
@@ -74,38 +57,15 @@ export class ProductsComponent implements OnInit {
   * @param id: the product ID.
   * @return void
   */
-  delete(id: number): void {
-    this.products = this.products.filter(
-      (product) => product.id !== id
-    );
-  }
+  delete(id: number): void {}
 
   /**
-  * Delete product from the list.
+  * Add product to the list.
   *
-  * @param id: the product ID.
+  * @param item: the product data fields.
   * @return void
   */
-  add(item: Product): void {
-
-    const newProduct: Product = {
-      id: 3,
-      title: item.title,
-      isChecked: false,
-    };
-
-    this.products.push(newProduct);
-    // reset the "Add item" title.
-
-    this.newProduct = {
-      id: null,
-      title: null,
-      isChecked: false,
-    };
-
-    this.addItemTitle = 'Add item';
-
-  }
+  add(item: Product): void {}
 
   ngOnInit() {
   }

@@ -2,10 +2,10 @@
   <h2 class="products__title">{{ title }}</h2>
   <ul class="products__list">
     <li *ngFor="let product of products" class="products__list__item">
-      <input class="item__check__btn" type="checkbox" [(ngModel)]="product.isChecked">
+      <input class="item__check__btn" type="checkbox" (click)="toggleCheckedStatus(product)"  [(ngModel)]="product.isChecked">
       <input class="item__title__field" type="text" [ngClass]="{'checked': product.isChecked}" [disabled]="product.isChecked" [(ngModel)]="product.title">
       <button class="item__delete__btn" (click)="delete(product.id)">x</button>
     </li>
   </ul>
-  <input class="add__new__item__field" type="text" [placeholder]="addItemTitle" [(ngModel)]="newProduct.title">
+  <input class="add__new__item__field" type="text" placeholder="Add Item" (keyup.enter)="add(newProduct)" [(ngModel)]="newProduct.title">
 </div>

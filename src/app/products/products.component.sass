@@ -24,6 +24,9 @@
     padding: 5px 10px
     border-bottom: $border-base-style
 
+    &:last-child
+        border-bottom: 0
+
 .item__check__btn
     +reset-button-style()
     margin-right: .25rem
@@ -48,8 +51,10 @@
     color: $danger
     vertical-align: middle
 
-.add__new__item__btn
+.add__new__item__field
     +reset-button-style()
+    width: 100%
     padding: 5px 0 5px 30px
+    border-top: $border-base-style
     color: $light-text
     text-transform: capitalize

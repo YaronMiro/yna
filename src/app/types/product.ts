@@ -1,8 +1,8 @@
 /**
 * Declare the Product type structure.
 *
-* @property id: Product ID.
-* @property title: Product title.
+* @property id: Product ID - existing product: number || new product: null.
+* @property title: Product title - existing product: string || new product: null.
 * @property isChecked: Flag to mark the product.
 * @property quantity: Product quantity.
 * @property price: Product price.
@@ -11,8 +11,8 @@
 * @return Product {object}
 */
 export interface Product {
-    id: number;
-    title: string;
+    id: number | null;
+    title: string | null;
     isChecked: boolean;
     quantity?: number;
     price?: string;

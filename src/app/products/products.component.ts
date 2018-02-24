@@ -10,6 +10,13 @@ export class ProductsComponent implements OnInit {
 
   private _title: string;
 
+  newProduct: Product =
+    {
+      id: null,
+      title: null,
+      isChecked: false,
+    };
+
   products: Product[] = [
     {
       id: 1,

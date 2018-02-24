@@ -7,8 +7,8 @@
       <button class="item__delete__btn" (click)="delete(product.id)">x</button>
     </li>
   </ul>
-  <button class="add__new__item__btn">add item</button>
+  <input class="add__new__item__field" type="text" [(ngModel)]="newProduct.title" placeholder="add item">
 </div>
 <pre>
-  <!-- {{ products | json }} -->
+  {{ newProduct | json }}
 </pre>

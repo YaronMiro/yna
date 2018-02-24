@@ -14,14 +14,14 @@ export class ProductsComponent implements OnInit {
     {
       id: 1,
       title: 'milk',
-      isChecked: true,
+      isChecked: false,
       quantity: 1, price: '25 Nis',
       description: 'some text about product'
     },
     {
       id: 2,
-      title: 'breed',
-      isChecked: false,
+      title: 'bread',
+      isChecked: true,
       quantity: 2
     }
   ];
@@ -37,6 +37,18 @@ export class ProductsComponent implements OnInit {
    */
   get title(): string {
     return this._title;
+  }
+
+  /**
+  * Delete product from the list.
+  *
+  * @param id: the product ID.
+  * @return void
+  */
+  delete(id: number): void {
+    this.products = this.products.filter(
+      (product) => product.id !== id
+    );
   }
 
   ngOnInit() {

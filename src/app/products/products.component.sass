@@ -2,12 +2,11 @@
 
 .products
     max-width: 300px
-    height: 400px
     border: $border-base-style
 
 .products__title
     margin: 0
-    padding: .3rem .7rem
+    padding: 5px 10px
     color: $title
     font:
         size: 1.25rem
@@ -17,10 +16,40 @@
     +gradient-background()
 
 .products__list
-    margin: 0
-    padding: 0
+    +reset-list-style()
+    padding: .75rem 0 0
     border-top: $border-base-style
-    list-style: none
 
 .products__list__item
     padding: 5px 10px
+    border-bottom: $border-base-style
+
+.item__check__btn
+    +reset-button-style()
+    margin-right: .25rem
+    vertical-align: middle
+    cursor: pointer
+
+.item__title__field
+    width: 87%
+    border: 0
+    color: $light-text
+    text-transform: capitalize
+
+    &:focus
+        outline: 0
+
+    &.checked
+        text-decoration: line-through
+        text-decoration-color: $text
+
+.item__delete__btn
+    +reset-button-style()
+    color: $danger
+    vertical-align: middle
+
+.add__new__item__btn
+    +reset-button-style()
+    padding: 5px 0 5px 30px
+    color: $light-text
+    text-transform: capitalize

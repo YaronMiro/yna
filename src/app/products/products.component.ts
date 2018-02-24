@@ -31,7 +31,7 @@ export class ProductsComponent implements OnInit {
   ];
 
   constructor() {
-    this._title = 'add your item here';
+    this._title = 'add your items here';
   }
 
   /**
@@ -46,10 +46,10 @@ export class ProductsComponent implements OnInit {
   /**
   * Toggle the product "checked" status.
   *
-  * @param item: the product data fields.
+  * @param product: the product data fields.
   * @return void
   */
-  toggleCheckedStatus(item: Product): void {}
+  toggleCheckedStatus(product: Product): void {}
 
   /**
   * Delete product from the list.
@@ -62,10 +62,10 @@ export class ProductsComponent implements OnInit {
   /**
   * Add product to the list.
   *
-  * @param item: the product data fields.
+  * @param product: the product data fields.
   * @return void
   */
-  add(item: Product): void {}
+  add(product: Product): void {}
 
   ngOnInit() {
   }

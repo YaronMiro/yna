@@ -2,20 +2,16 @@
 
 .products
     margin: 0 auto
-    max-width: 300px
     border: $border-base-style-light
+
+    +respond-at($breakpoint-M)
+        display: block
+        width: 300px
+        min-height: 260px
 
 
     .products__title
-        margin: 0
-        padding: 5px 10px
-        color: $title
-        font:
-            size: 1.25rem
-            weight: normal
-            style: normal
-        text-transform: uppercase
-        +gradient-background()
+        +main-title-style()
 
 
     .products__list
@@ -109,3 +105,14 @@
     &.no__products
         .add__new__product__field
             padding-left: 10px
+
+            +respond-at($breakpoint-M)
+                border-bottom: $border-base-style-light
+
+
+    /* Style elements when a product is been edited/added (active) */
+    &.add__or__edit__product
+        margin-bottom: 20px
+
+        +respond-at($breakpoint-M)
+            float: left

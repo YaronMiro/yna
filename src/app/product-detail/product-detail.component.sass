@@ -1,0 +1,53 @@
+@import '~assets/sass/helpers/style'
+
+.product__detail
+    border: $border-base-style-light
+
+    +respond-at($breakpoint-M)
+        float: right
+        width: 450px
+        min-height: 260px
+
+    .product__detail__title
+        +main-title-style()
+
+
+    .product__fields
+        margin: 12px 0
+        padding: 0 10px
+
+        +respond-at($breakpoint-M)
+            margin-bottom: 0
+
+
+        .product__field__container
+
+            &+.product__field__container
+                margin-top: 20px
+
+
+            .product__field__label
+                display: block
+                color: $light-text
+                text-transform: capitalize
+
+
+            .product__field
+                display: block
+                margin-top: 5px
+                padding: 0
+                width: 100%
+                color: $light-text
+                border: $border-base-style-light
+                border-radius: 0
+                outline: 0
+                color: $light-text
+
+                &:focus
+                    color: $text
+                    outline: 0
+
+                &.field__description
+                    max-height: 40px
+                    min-width: 100%
+                    max-width: 100%

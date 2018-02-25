@@ -1,5 +1,6 @@
-<div class="products" [ngClass]="{'no__products': !products.length}">
+<section class="products" [ngClass]="{'no__products': !products.length, 'product__selected': selectedProductId}">
   <h2 class="products__title">{{ title }}</h2>
+  <!-- List of Products -->
   <ul class="products__list" *ngIf="products.length">
     <li *ngFor="let product of products" class="products__list__item" [ngClass]="{'active': product.id == selectedProductId}">
       <input id="check-product-{{ product.id }}" class="product__checkbox" type="checkbox" (click)="toggleCheckedStatus(product)" [(ngModel)]="product.isChecked">
@@ -10,4 +11,6 @@
     </li>
   </ul>
   <input class="add__new__product__field" type="text" placeholder="Add Item" (keyup.enter)="add(newProduct)" [(ngModel)]="newProduct.title">
-</div>
+</section>
+<!-- Product details -->
+<app-product-detail></app-product-detail>

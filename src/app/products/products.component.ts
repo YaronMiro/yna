@@ -19,6 +19,7 @@ export class ProductsComponent implements OnInit {
   constructor() {
     this._title = 'add your items here';
     this.products = [];
+    this._selectedProductId = 1;
     this.newProduct = {
       id: null,
       title: null,

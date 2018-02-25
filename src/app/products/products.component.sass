@@ -3,80 +3,94 @@
 .products
     margin: 0 auto
     max-width: 300px
-    border: $border-base-style
+    border: $border-base-style-light
 
-.products__title
-    margin: 0
-    padding: 5px 10px
-    color: $title
-    font:
-        size: 1.25rem
-        weight: normal
-        style: normal
-    text-transform: uppercase
-    +gradient-background()
 
-.products__list
-    +reset-list-style()
-    padding: 15px 0 0
-    border-top: $border-base-style
+    .products__title
+        margin: 0
+        padding: 5px 10px
+        color: $title
+        font:
+            size: 1.25rem
+            weight: normal
+            style: normal
+        text-transform: uppercase
+        +gradient-background()
 
-.products__list__item
-    position: relative
-    padding: 5px 10px
-    border-bottom: $border-base-style
 
-    &:last-child
-        border-bottom: 0
+    .products__list
+        +reset-list-style()
+        padding: 15px 0 0
+        border-top: $border-base-style-light
 
-.product__checkbox
-    display: none
 
-    &+.product__check__btn
+    .products__list__item
+        padding: 5px 10px
+        border-bottom: $border-base-style-light
+
+        &.active
+            border-bottom: $border-base-style-text
+
+
+    .product__checkbox
+        display: none
+
+        &+.product__check__btn
+            display: inline-block
+            width: 12px 
+            height: 13px
+            margin-right: 4px
+            background:
+                image: url(/assets/images/un-checked.jpg)
+                repeat: no-repeat
+            vertical-align: middle
+            cursor: pointer
+        
+        &:checked + .product__check__btn
+            background:
+                image: url(/assets/images/checked.jpg)
+                repeat: no-repeat
+
+
+    .product__checked__title
         display: inline-block
-        background:
-            image: url(/assets/images/un-checked.jpg)
-            repeat: no-repeat
-        width: 12px 
-        height: 13px
-        margin-right: 4px
+        height: 20px
+        line-height: 20px
+        color: $light-text
+        text:
+            decoration: line-through
+            decoration-color: $text
+            transform: capitalize
+
+
+    .product__title__field
+        height: 20px
+        border: 0
+        color: $light-text
+        text-transform: capitalize
+
+        &:focus
+            outline: 0
+            color: $text
+
+
+    .product__delete__btn
+        +reset-button-style()
+        color: $danger
         vertical-align: middle
-        cursor: pointer
-    
-    &:checked + .product__check__btn
-        background:
-            image: url(/assets/images/checked.jpg)
-            repeat: no-repeat
 
-.product__checked__title
-    display: inline-block
-    height: 20px
-    line-height: 20px
-    color: $light-text
-    text:
-        decoration: line-through
-        decoration-color: $text
-        transform: capitalize
 
-.product__title__field
-    height: 20px
-    border: 0
-    color: $light-text
-    text-transform: capitalize
+    .add__new__product__field
+        +reset-button-style()
+        width: 100%
+        padding: 8px 30px
+        color: $light-text
+        text-transform: capitalize
 
-    &:focus
-        outline: 0
-        color: $text
+        &:focus
+            outline: 0
 
-.product__delete__btn
-    +reset-button-style()
-    color: $danger
-    vertical-align: middle
-
-.add__new__product__field
-    +reset-button-style()
-    width: 100%
-    padding: 5px 30px
-    border-top: $border-base-style
-    color: $light-text
-    text-transform: capitalize
+    /* Style elements when the are no products */
+    &.no__products
+        .add__new__product__field
+            padding-left: 10px

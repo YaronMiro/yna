@@ -10,6 +10,8 @@ export class ProductsComponent implements OnInit {
 
   private _title: string;
 
+  private _selectedProductId: number | null;
+
   newProduct: Product =
     {
       id: null,
@@ -41,6 +43,24 @@ export class ProductsComponent implements OnInit {
    */
   get title(): string {
     return this._title;
+  }
+
+  /**
+   * Get the selected product ID.
+   *
+   * @return number | null
+   */
+  get selectedProductId(): number | null {
+    return this._selectedProductId;
+  }
+
+  /**
+   * Set the selected product ID.
+   *
+   * @param id number | null
+   */
+  set selectedProductId(id: number | null) {
+    this._selectedProductId = id;
   }
 
   /**

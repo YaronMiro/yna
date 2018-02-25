@@ -25,9 +25,6 @@
         padding: 5px 10px
         border-bottom: $border-base-style-light
 
-        &.active
-            border-bottom: $border-base-style-text
-
 
     /* Use images for the checkbox input
      * in order to match cross browser styling.
@@ -85,6 +82,10 @@
         padding: 8px 30px
         color: $light-text
         text-transform: capitalize
+
+        +respond-at($breakpoint-M)
+            border-bottom: $border-base-style-light
+
 
         &:focus
             outline: 0

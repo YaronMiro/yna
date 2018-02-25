@@ -1,22 +1,24 @@
-<section class="products" [ngClass]="{'no__products': !products.length, 'add__or__edit__product': selectedProductId}">
+<section class="products" [ngClass]="{'no__products': !products.length, 'add__or__edit__product': isStatusNewOrEdit()}">
   <h2 class="products__title">Add your items here</h2>
   <!-- List of Products -->
   <ul class="products__list" *ngIf="products.length">
-    <li *ngFor="let product of products" class="products__list__item" [ngClass]="{'active': product.id == selectedProductId}">
-      <!-- Togole product status -->
+    <li *ngFor="let product of products" class="products__list__item">
+      <!-- Togole product status button -->
       <input id="check-product-{{ product.id }}" class="product__checkbox" type="checkbox" (click)="toggleCheckedStatus(product)" [(ngModel)]="product.isChecked">
       <label for="check-product-{{ product.id }}" class="product__check__btn"></label>
       <!-- Display checked product title -->
       <label class="product__checked__title" for="product-id-{{ product.id }}" *ngIf="product.isChecked">{{ product.title }}</label>
-      <!-- Edit exsisting product -->
-      <input id="product-id-{{ product.id }}" class="product__title__input__field" type="text" *ngIf="!product.isChecked" [ngClass]="{'checked': product.isChecked}" [(ngModel)]="product.title">
-      <!-- Delete product -->
+      <!-- Edit exsisting product field -->
+      <input id="product-id-{{ product.id }}" type="text" class="product__title__input__field" [ngClass]="{'checked': product.isChecked}" [(ngModel)]="product.title" (focus)="setStatusToNewOrEdit()" *ngIf="!product.isChecked" (focus)="setStatusToNewOrEdit()" >
+      <!-- Delete product button -->
       <button class="product__delete__btn" (click)="delete(product.id)">x</button>
     </li>
   </ul>
-  <!-- Add product -->
-  <input class="add__new__product__field" type="text" placeholder="Add Item" (keyup.enter)="add(newProduct)" [(ngModel)]="newProduct.title">
+  <!-- Add product field -->
+  <input type="text" class="add__new__product__field" placeholder="Add Item" (focus)="setStatusToNewOrEdit()" (keyup.enter)="add(newProduct)" [(ngModel)]="newProduct.title">
 </section>
-<pre>{{ products | json }}</pre>
 <!-- View product detail fields -->
-<app-product-detail *ngIf="selectedProductId"></app-product-detail>
+<app-product-detail *ngIf="isStatusNewOrEdit()"></app-product-detail>
+
+
+<pre style="display: block; clear: both">{{ products | json }}</pre>

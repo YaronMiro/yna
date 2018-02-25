@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve --host 0.0.0.0 --open` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ##### In case `livereload` is not working on your dev enviroment: #####
 
@@ -13,6 +13,8 @@ First remove the `node_modules` directory and re-install by Running the `npm ins
 ## Build Production.
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+
+Run `ng serve --prod` to test the production code on a local server
 
 ##### Push production build to `gh-pages` #####
 Install [angular-cli-ghpages](https://github.com/angular-schule/angular-cli-ghpages) by running the `npm i -g angular-cli-ghpages` command

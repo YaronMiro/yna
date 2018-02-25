@@ -1,0 +1,111 @@
+@import '~assets/sass/helpers/style'
+
+.products
+    margin: 0 auto
+    max-width: 300px
+    border: $border-base-style-light
+
+
+    .products__title
+        margin: 0
+        padding: 5px 10px
+        color: $title
+        font:
+            size: 1.25rem
+            weight: normal
+            style: normal
+        text-transform: uppercase
+        +gradient-background()
+
+
+    .products__list
+        +reset-list-style()
+        padding: 15px 0 0
+        border-top: $border-base-style-light
+
+
+    .products__list__item
+        position: relative
+        padding: 5px 10px
+        border-bottom: $border-base-style-light
+
+        &.active
+            border-bottom: $border-base-style-text
+
+
+    /* Use images for the checkbox input
+     * in order to match cross browser styling.
+     */
+    .product__checkbox
+        display: none
+
+        &+.product__check__btn
+            display: inline-block
+            width: 7%
+            height: 13px
+            vertical-align: middle
+            cursor: pointer
+            background:
+                image: url(/assets/images/un-checked.jpg)
+                repeat: no-repeat
+                size: 12px 13px
+
+        
+        &:checked + .product__check__btn
+            background:
+                image: url(/assets/images/checked.jpg)
+                repeat: no-repeat
+
+
+    .product__checked__title
+        display: inline-block
+        width: 88%
+        height: 20px
+        line-height: 20px
+        color: $light-text
+        text:
+            decoration: line-through
+            decoration-color: $text
+            transform: capitalize
+
+
+    .product__title__input__field
+        padding: 0 5px 0 0
+        width: 88%
+        height: 20px
+        border: 0
+        border-radius: 0
+        color: $light-text
+        text-transform: capitalize
+
+        &:focus
+            outline: 0
+            color: $text
+
+
+    .add__new__product__field
+        +reset-button-style()
+        width: 100%
+        padding: 8px 30px
+        color: $light-text
+        text-transform: capitalize
+
+        &:focus
+            outline: 0
+
+
+    .product__delete__btn
+        +reset-button-style()
+        z-index: 2
+        position: absolute
+        right: 10px
+        top: 50%
+        margin-top: -9px
+        color: $danger
+        vertical-align: middle
+
+
+    /* Style elements when the are no products */
+    &.no__products
+        .add__new__product__field
+            padding-left: 10px

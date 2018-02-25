@@ -1,5 +1,5 @@
 /**
-* Declare the Product type structure.
+* The Product type structure.
 *
 * @property id: Product ID - existing product: number || new product: null.
 * @property title: Product title - existing product: string || new product: null.
@@ -10,11 +10,15 @@
 * @type Product
 * @return Product {object}
 */
-export interface Product {
-    id: number | null;
-    title: string | null;
-    isChecked: boolean;
-    quantity?: number;
-    price?: string;
-    description?: string;
+export class Product {
+    id: number;
+    title = '';
+    isChecked = false;
+    quantity?: number | null;
+    price?: string | null;
+    description?: string | null;
+
+    constructor(productData: Object = {}) {
+        Object.assign(this, productData);
+      }
 }

@@ -1,5 +1,8 @@
-import { Product } from './../types/product';
 import { Component, OnInit } from '@angular/core';
+
+import { Product } from './../types/product';
+import { ProductService } from './../services/product/product.service';
+
 
 @Component({
   selector: 'app-products',
@@ -8,29 +11,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsComponent implements OnInit {
 
-  private selectedProductId: number | null;
-
-  newProduct: Product;
+  selectedProductId: number | null = null;
 
   products: Product[];
 
-  constructor() {
-    this.products = [];
-    this.newProduct = {
-      id: null,
-      title: null,
-      isChecked: false,
-    };
+  newProduct: Product = new Product();
+
+  constructor(private productService: ProductService) { }
+
+  ngOnInit() {
+    // Get all exisiting products.
+    this.products = this.productService.products;
   }
 
-  ngOnInit() {}
-
   // Toggle the product "checked" status.
-  toggleCheckedStatus(product: Product): void {}
+  toggleCheckedStatus(product: Product): void { }
 
   // Delete product.
-  delete(id: number): void {}
+  delete(id: number): void {
+    this.productService.delete(id);
+  }
 
   // Add product.
-  add(product: Product): void {}
+  add(product: Product): void {
+    this.productService.add(this.newProduct);
+    // Reset the new product values.
+    this.newProduct = new Product();
+  }
 }

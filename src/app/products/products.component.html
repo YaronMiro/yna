@@ -17,5 +17,6 @@
   <!-- Add product -->
   <input class="add__new__product__field" type="text" placeholder="Add Item" (keyup.enter)="add(newProduct)" [(ngModel)]="newProduct.title">
 </section>
+<pre>{{ products | json }}</pre>
 <!-- View product detail fields -->
 <app-product-detail *ngIf="selectedProductId"></app-product-detail>

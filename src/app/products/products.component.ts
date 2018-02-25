@@ -25,17 +25,21 @@ export class ProductsComponent implements OnInit {
   }
 
   // Toggle the product "checked" status.
-  toggleCheckedStatus(product: Product): void { }
+  toggleCheckedStatus(product: Product): void {
+    this.productService.toggleCheckedStatus(product);
+  }
 
   // Delete product.
   delete(id: number): void {
     this.productService.delete(id);
+
+    // FIX!! hack to update list by reference.
+    this.products = this.productService.products;
   }
 
   // Add product.
   add(product: Product): void {
     this.productService.add(this.newProduct);
-    // Reset the new product values.
     this.newProduct = new Product();
   }
 }

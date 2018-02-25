@@ -18,7 +18,7 @@ export class Product {
     price?: string | null;
     description?: string | null;
 
-    constructor(productData: Object = {}) {
-        Object.assign(this, productData);
+    constructor(values: Object = {}) {
+        Object.assign(this, values);
       }
 }

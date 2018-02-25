@@ -25,6 +25,7 @@
 
 
     .products__list__item
+        position: relative
         padding: 5px 10px
         border-bottom: $border-base-style-light
 
@@ -32,19 +33,23 @@
             border-bottom: $border-base-style-text
 
 
+    /* Use images for the checkbox input
+     * in order to match cross browser styling.
+     */
     .product__checkbox
         display: none
 
         &+.product__check__btn
             display: inline-block
-            width: 12px 
+            width: 7%
             height: 13px
-            margin-right: 4px
+            vertical-align: middle
+            cursor: pointer
             background:
                 image: url(/assets/images/un-checked.jpg)
                 repeat: no-repeat
-            vertical-align: middle
-            cursor: pointer
+                size: 12px 13px
+
         
         &:checked + .product__check__btn
             background:
@@ -54,6 +59,7 @@
 
     .product__checked__title
         display: inline-block
+        width: 88%
         height: 20px
         line-height: 20px
         color: $light-text
@@ -63,21 +69,18 @@
             transform: capitalize
 
 
-    .product__title__field
+    .product__title__input__field
+        padding: 0 5px 0 0
+        width: 88%
         height: 20px
         border: 0
+        border-radius: 0
         color: $light-text
         text-transform: capitalize
 
         &:focus
             outline: 0
             color: $text
-
-
-    .product__delete__btn
-        +reset-button-style()
-        color: $danger
-        vertical-align: middle
 
 
     .add__new__product__field
@@ -89,6 +92,18 @@
 
         &:focus
             outline: 0
+
+
+    .product__delete__btn
+        +reset-button-style()
+        z-index: 2
+        position: absolute
+        right: 10px
+        top: 50%
+        margin-top: -9px
+        color: $danger
+        vertical-align: middle
+
 
     /* Style elements when the are no products */
     &.no__products

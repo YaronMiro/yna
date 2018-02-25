@@ -12,28 +12,18 @@ export class ProductsComponent implements OnInit {
 
   private _selectedProductId: number | null;
 
-  newProduct: Product =
-    {
+  newProduct: Product;
+
+  products: Product[];
+
+  constructor() {
+    this._title = 'add your items here';
+    this.products = [];
+    this.newProduct = {
       id: null,
       title: null,
       isChecked: false,
     };
-
-  products: Product[] = [
-    {
-      id: 1,
-      title: 'chips',
-      isChecked: true,
-    },
-    {
-      id: 2,
-      title: 'cockie',
-      isChecked: false,
-    }
-  ];
-
-  constructor() {
-    this._title = 'add your items here';
   }
 
   /**

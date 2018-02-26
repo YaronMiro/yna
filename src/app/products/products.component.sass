@@ -3,13 +3,15 @@
 .products
     margin: 0 auto
     border: $border-base-style-light
+    
+    margin-bottom: 20px
 
     +respond-at($breakpoint-M)
+        float: left
         display: block
         width: 300px
         min-height: 260px
-
-
+    
     .products__title
         +main-title-style()
 
@@ -115,10 +117,3 @@
 
                 &:focus
                     border-bottom: $border-base-style-text
-
-    /* Style elements when a product is been edited/added (active) */
-    &.editor__mode
-        margin-bottom: 20px
-
-        +respond-at($breakpoint-M)
-            float: left

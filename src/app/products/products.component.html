@@ -1,4 +1,4 @@
-<section class="products" [ngClass]="{'no__products': !products.length, 'editor__mode': isEditorMode()}">
+<section class="products" [ngClass]="{'no__products': !products.length}">
   <h2 class="products__title">Add your items here</h2>
   <!-- List of Products -->
   <ul class="products__list" *ngIf="products.length">

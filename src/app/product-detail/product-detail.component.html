@@ -5,17 +5,17 @@
     <!-- Quantity field  -->
     <div class="product__field__container">
       <label class="product__field__label" for="quantity">quantity</label>
-      <input id="quantity" class="product__field" type="text" title="The number of items">
+      <input id="quantity" class="product__field" type="text" title="The number of items" [(ngModel)]="product.quantity">
     </div>
     <!-- Price field  -->
     <div class="product__field__container">
       <label class="product__field__label" for="quantity">price</label>
-      <input id="price" class="product__field" type="text" title="The number of items">
+      <input id="price" class="product__field" type="text" title="The number of items" [(ngModel)]="product.price">
     </div>
     <!-- Description field  -->
     <div class="product__field__container">
       <label class="product__field__label" for="quantity">description</label>
-      <textarea id="description" class="product__field field__description" title="The number of items"></textarea>
+      <textarea id="description" class="product__field field__description" title="The number of items" [(ngModel)]="product.description"></textarea>
     </div>
   </div>
 </section>

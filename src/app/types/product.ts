@@ -12,11 +12,11 @@
 */
 export class Product {
     id: number;
-    title = '';
+    title: string | null = null;
     isChecked = false;
-    quantity?: number | null;
-    price?: string | null;
-    description?: string | null;
+    quantity?: number | null = null;
+    price?: string | null = null;
+    description?: string | null = null;
 
     constructor(values: Object = {}) {
         Object.assign(this, values);

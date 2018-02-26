@@ -9,16 +9,16 @@
       <!-- Display checked product title -->
       <label class="product__checked__title" for="product-id-{{ product.id }}" *ngIf="product.isChecked">{{ product.title }}</label>
       <!-- Edit exsisting product field -->
-      <input id="product-id-{{ product.id }}" type="text" class="product__title__input__field" [ngClass]="{'checked': product.isChecked}" *ngIf="!product.isChecked" [(ngModel)]="product.title" (focus)="setModeToEditor(product)">
+      <input id="product-id-{{ product.id }}" type="text" class="product__title__input__field" *ngIf="!product.isChecked" [(ngModel)]="product.title" (focus)="setEditorMode(product)" (keyup.enter)="updateProduct(product)">
       <!-- Delete product button -->
       <button class="product__delete__btn" (click)="delete(product.id)">x</button>
     </li>
   </ul>
   <!-- Add product field -->
-  <input type="text" class="add__new__product__field" placeholder="Add Item" (focus)="setModeToEditor()" (keyup.enter)="add(newProduct)" [(ngModel)]="newProduct.title">
+  <input type="text" class="add__new__product__field" placeholder="Add Item" (focus)="setEditorMode(newProduct)" (keyup.enter)="add(newProduct)" [(ngModel)]="newProduct.title">
 </section>
 <!-- View product detail fields -->
-<app-product-detail *ngIf="isEditorMode()"></app-product-detail>
+<app-product-detail *ngIf="isEditorMode()" [product]="selectedProduct || newProduct"></app-product-detail>
 
 
 <pre style="display: block; clear: both">{{ products | json }}</pre>

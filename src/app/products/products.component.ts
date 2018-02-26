@@ -32,35 +32,49 @@ export class ProductsComponent implements OnInit {
     this.products = this.productService.products;
   }
 
-  // Set mode when adding/editing product's title.
-  setModeToEditor(product?: Product): void {
-    if (product) {
-      this.selectedProduct = product;
-    }
+  // Set editor to "add" or "Edit" mode.
+  setEditorMode(product?: Product): void {
+    this.selectedProduct = product.id ? product : null
     this.editorMode = true;
   }
 
-  // Check if we are in the editor mode.
+  // Check if we are in editor mode.
   isEditorMode(): boolean {
     return this.editorMode;
-  }
-
-  // Toggle the product "checked" status.
-  toggleCheckedStatus(product: Product): void {
-    this.productService.toggleCheckedStatus(product);
-  }
-
-  // Delete product.
-  delete(id: number): void {
-    this.productService.delete(id);
-
-    // FIX!! hack to update list by reference.
-    this.products = this.productService.products;
   }
 
   // Add product.
   add(product: Product): void {
     this.productService.add(this.newProduct);
+    this.resetEditor();
+  }
+
+  // Reset the editor.
+  resetEditor(): void {
+    // Reset the editor to "add" new product mode.
     this.newProduct = new Product();
+    this.selectedProduct = null;
+    this.editorMode = false;
+  }
+
+  // Update product.
+  updateProduct(product: Product): void {
+    this.productService.updateProduct(product.id, {title: product.title});
+    this.resetEditor();
+  }
+
+  // Toggle the product "checked" status.
+  toggleCheckedStatus(product: Product): void {
+    this.productService.toggleCheckedStatus(product);
+    this.resetEditor();
+  }
+
+  // Delete product.
+  delete(id: number): void {
+    this.productService.delete(id);
+    this.resetEditor();
+
+    // FIX!! hack to update list by reference.
+    this.products = this.productService.products;
   }
 }

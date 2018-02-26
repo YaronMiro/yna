@@ -1,5 +1,8 @@
 <section class="product__detail">
-  <h2 class="product__detail__title">title</h2>
+  <!-- Title for adding a new product -->
+  <h2 class="product__detail__title" *ngIf="!product.id">Product details</h2>
+  <!-- Title for adding a new product -->
+  <h2 class="product__detail__title" *ngIf="product.id">{{ product.title }} details</h2>
   <div class="product__fields">
     <!-- Quantity field  -->
     <div class="product__field__container">

@@ -27,7 +27,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     // Get all exisiting products.
-    this.products = this.productService.products;
+    this.productService.products.subscribe(products => this.products = products);
   }
 
   // Set editor to "add" or "Edit" mode.

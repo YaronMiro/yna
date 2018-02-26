@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+
 import { Product } from './../../types/product';
+import { MessageService } from './../../services/message/message.service';
+
 
 @Injectable()
 export class ProductService {
@@ -10,13 +15,17 @@ export class ProductService {
   private lastId = 0;
 
   // The products collection.
-  private _products: Product[] = [];
+  private _products: Product[] = [
+    // new Product({id: 1, title: 'test me'}),
+    // new Product({id: 2, title: 'test me-2'}),
+  ];
 
-  constructor() { }
+  constructor(private messageService: MessageService) { }
 
   // Simulate GET /product.
-  get products(): Product[] {
-    return this._products;
+  get products(): Observable<Product[]> {
+    this.messageService.add('ProductService: fetched products');
+    return of (this._products);
   }
 
   // Toggle checked status.

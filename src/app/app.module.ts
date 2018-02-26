@@ -8,6 +8,8 @@ import { HeaderComponent } from './layout/header/header.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductService } from './services/product/product.service';
+import { MessagesComponent } from './messages/messages.component';
+import { MessageService } from './services/message/message.service';
 
 
 @NgModule({
@@ -15,13 +17,14 @@ import { ProductService } from './services/product/product.service';
     AppComponent,
     HeaderComponent,
     ProductsComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
-  providers: [ProductService],
+  providers: [ProductService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

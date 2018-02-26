@@ -23,7 +23,7 @@ export class ProductsComponent implements OnInit {
   editorMode = false;
 
   // The current selected product.
-  selectedProductId: number | null = null;
+  selectedProduct: Product | null = null;
 
   constructor(private productService: ProductService) {}
 
@@ -33,15 +33,15 @@ export class ProductsComponent implements OnInit {
   }
 
   // Set mode when adding/editing product's title.
-  setModeToEditor(id?: number) {
-    if (id) {
-      this.selectedProductId = id;
+  setModeToEditor(product?: Product): void {
+    if (product) {
+      this.selectedProduct = product;
     }
     this.editorMode = true;
   }
 
   // Check if we are in the editor mode.
-  isEditorMode() {
+  isEditorMode(): boolean {
     return this.editorMode;
   }
 

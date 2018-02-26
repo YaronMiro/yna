@@ -2,14 +2,14 @@
   <h2 class="products__title">Add your items here</h2>
   <!-- List of Products -->
   <ul class="products__list" *ngIf="products.length">
-    <li *ngFor="let product of products" class="products__list__item" [ngClass]="{'active': selectedProductId}">
+    <li *ngFor="let product of products" class="products__list__item" [ngClass]="{'active': selectedProduct}">
       <!-- Togole product status button -->
       <input id="check-product-{{ product.id }}" class="product__checkbox" type="checkbox" (click)="toggleCheckedStatus(product)" [(ngModel)]="product.isChecked">
       <label for="check-product-{{ product.id }}" class="product__check__btn"></label>
       <!-- Display checked product title -->
       <label class="product__checked__title" for="product-id-{{ product.id }}" *ngIf="product.isChecked">{{ product.title }}</label>
       <!-- Edit exsisting product field -->
-      <input id="product-id-{{ product.id }}" type="text" class="product__title__input__field" [ngClass]="{'checked': product.isChecked}" *ngIf="!product.isChecked" [(ngModel)]="product.title" (focus)="setModeToEditor(product.id)">
+      <input id="product-id-{{ product.id }}" type="text" class="product__title__input__field" [ngClass]="{'checked': product.isChecked}" *ngIf="!product.isChecked" [(ngModel)]="product.title" (focus)="setModeToEditor(product)">
       <!-- Delete product button -->
       <button class="product__delete__btn" (click)="delete(product.id)">x</button>
     </li>

@@ -96,4 +96,5 @@ export class ProductsComponent implements OnInit {
     // FIX!! hack to update list by reference.
     this.products = this.productService.products;
   }
+
 }

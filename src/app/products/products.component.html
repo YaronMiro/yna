@@ -20,5 +20,8 @@
 <!-- View product detail fields -->
 <app-product-detail [product]="selectedProduct"></app-product-detail>
 
-
-<pre style="display: block; clear: both">{{ products | json }}</pre>
+<pre style="display: block; clear: both">
+  <h4>Number of products: {{ products.length }}</h4>
+  <strong>Products list:</strong>
+  {{ products | json }}
+</pre>

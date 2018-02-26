@@ -35,7 +35,7 @@ export class ProductService {
   }
 
   // Simulate GET /product/:id
-  getProduct(id: number): Product {
+  get(id: number): Product {
     return this._products
       .filter((product) => product.id === id)
       .pop();
@@ -43,14 +43,27 @@ export class ProductService {
 
   // Simulate DELETE /product/:id
   delete(id: number): ProductService {
-    this._products = this._products
-      .filter((product) => product.id !== id);
+
+    // this._products = this._products
+    //   .filter((product) => product.id !== id);
+    // return this;
+
+    let index = 0;
+    // Keep the array reference.
+    for (const product of this._products) {
+      if (product.id === id) {
+        break;
+      }
+      index++;
+    }
+    this._products.splice(index, 1);
+
     return this;
   }
 
   // Simulate PUT /product/:id
   update(id: number, values: Object = {}): Product {
-    const product = this.getProduct(id);
+    const product = this.get(id);
     if (!product) {
       return null;
     }

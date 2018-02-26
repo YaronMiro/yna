@@ -92,9 +92,6 @@ export class ProductsComponent implements OnInit {
   delete(id: number): void {
     this.productService.delete(id);
     this.resetEditor();
-
-    // FIX!! hack to update list by reference.
-    this.products = this.productService.products;
   }
 
 }

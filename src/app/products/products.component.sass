@@ -38,7 +38,7 @@
 
         &+.product__check__btn
             display: inline-block
-            width: 7%
+            width: 18px
             height: 13px
             vertical-align: middle
             cursor: pointer
@@ -47,7 +47,6 @@
                 repeat: no-repeat
                 size: 12px 13px
 
-        
         &:checked + .product__check__btn
             background:
                 image: url(/assets/images/checked.jpg)
@@ -109,8 +108,12 @@
 
     /* Style elements when the are no products */
     &.no__products
+        .products__title
+            border-bottom: $border-base-style-light
+
+
         .add__new__product__field
-            padding-left: 10px
+            padding: 21px 0 10px 10px
 
             +respond-at($breakpoint-M)
                 border-bottom: $border-base-style-light

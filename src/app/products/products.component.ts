@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit {
   newProduct: Product = new Product();
 
   // Flag for editor mode.
-  editorMode: false;
+  editorMode = false;
 
   constructor(private productService: ProductService) {}
 

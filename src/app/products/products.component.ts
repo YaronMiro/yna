@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 
-import { EditorStatus } from './status';
 import { Product } from './../types/product';
 import { ProductService } from './../services/product/product.service';
 
@@ -14,11 +13,14 @@ import { ProductService } from './../services/product/product.service';
 })
 export class ProductsComponent implements OnInit {
 
+  // Products collection.
   products: Product[];
 
+  // New product placeholder.
   newProduct: Product = new Product();
 
-  editorStatus: EditorStatus = EditorStatus.Nothing;
+  // Flag for editor mode.
+  editorMode: false;
 
   constructor(private productService: ProductService) {}
 
@@ -27,14 +29,14 @@ export class ProductsComponent implements OnInit {
     this.products = this.productService.products;
   }
 
-  // Set the status when adding/editing a product.
-  setStatusToNewOrEdit() {
-    this.editorStatus = EditorStatus.NewOrEdit;
+  // Set the status when adding/editing product's title.
+  setModeToEditor() {
+    this.editorMode = true;
   }
 
-  // Check if the given status is new or edit status.
-  isStatusNewOrEdit() {
-    return this.editorStatus === EditorStatus.NewOrEdit;
+  // Check if we are in the editor mode.
+  isEditorMode() {
+    return this.editorMode;
   }
 
   // Toggle the product "checked" status.

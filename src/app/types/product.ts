@@ -1,9 +1,9 @@
 /**
 * The Product type structure.
 *
-* @property id: Product ID - existing product: number || new product: null.
-* @property title: Product title - existing product: string || new product: null.
-* @property isChecked: Flag to mark the product as isCheckedd.
+* @property id: Product ID.
+* @property title: Product title.
+* @property isChecked: Flag to mark the product as checked.
 * @property quantity: Product quantity.
 * @property price: Product price.
 * @property description: Product description.
@@ -12,9 +12,9 @@
 */
 export class Product {
     id: number;
-    title: string | null = null;
+    title = '';
     isChecked = false;
-    quantity?: number | null = null;
+    quantity?: string | null = null;
     price?: string | null = null;
     description?: string | null = null;
 

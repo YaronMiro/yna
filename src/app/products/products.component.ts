@@ -79,7 +79,6 @@ export class ProductsComponent implements OnInit {
       return;
     }
     this.productService.update(product.id, {title: newTitle});
-    this.resetEditor();
   }
 
   // Toggle the product "checked" status.

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Product } from './../types/product';
+import { ProductService } from './../services/product/product.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -11,7 +12,12 @@ export class ProductDetailComponent implements OnInit {
 
   @Input() product: Product;
 
-  constructor() { }
+  constructor(private productService: ProductService) {  }
+
+    // Update product details.
+    update(product: Product): void {
+      this.productService.update(product.id, product);
+    }
 
   ngOnInit() {
   }

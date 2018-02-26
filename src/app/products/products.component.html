@@ -1,8 +1,8 @@
-<section class="products" [ngClass]="{'no__products': !products.length}">
+<section class="products" [ngClass]="{'no__products': !hasProducts()}">
   <h2 class="products__title">Add your items here</h2>
   <!-- List of Products -->
   <ul class="products__list" *ngIf="products.length">
-    <li *ngFor="let product of products" class="products__list__item" [ngClass]="{'active': selectedProduct && selectedProduct.id == product.id}">
+    <li *ngFor="let product of products" class="products__list__item" [ngClass]="{'active': isSelectedProduct(product.id)}">
       <!-- Togole product status button -->
       <input id="check-product-{{ product.id }}" class="product__checkbox" type="checkbox" (click)="toggleCheckedStatus(product)" [(ngModel)]="product.isChecked">
       <label for="check-product-{{ product.id }}" class="product__check__btn"></label>

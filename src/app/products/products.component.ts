@@ -41,6 +41,16 @@ export class ProductsComponent implements OnInit {
     return this.editorMode;
   }
 
+  // Check if this is the selected product.
+  isSelectedProduct(id: number): boolean {
+    return (this.selectedProduct && this.selectedProduct.id === id);
+  }
+
+  // Check if there are any products.
+  hasProducts(): boolean {
+    return this.products.length ? true : false;
+  }
+
   // Add product.
   add(product: Product): void {
     const newTitle = this.productService.sinitizeString(product.title);

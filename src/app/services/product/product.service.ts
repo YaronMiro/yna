@@ -43,21 +43,8 @@ export class ProductService {
 
   // Simulate DELETE /product/:id
   delete(id: number): ProductService {
-
-    // this._products = this._products
-    //   .filter((product) => product.id !== id);
-    // return this;
-
-    let index = 0;
-    // Keep the array reference.
-    for (const product of this._products) {
-      if (product.id === id) {
-        break;
-      }
-      index++;
-    }
-    this._products.splice(index, 1);
-
+    const product = this.get(id);
+    this._products.splice(this._products.indexOf(product), 1);
     return this;
   }
 

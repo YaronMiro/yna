@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { catchError, map, tap } from 'rxjs/operators';
+
 
 import { Product } from './../../types/product';
 import { MessageService } from './../../services/message/message.service';
@@ -14,18 +17,46 @@ export class ProductService {
   // automatic incrementing of ID's.
   private lastId = 0;
 
+   // URL to a web API.
+  private productsUrl = '/api/products';
+
   // The products collection.
-  private _products: Product[] = [
-    new Product({id: 1, title: 'test me'}),
-    new Product({id: 2, title: 'test me-2'}),
-  ];
+  private _products: Product[] = [];
 
-  constructor(private messageService: MessageService) { }
+  constructor( private messageService: MessageService, private http: HttpClient) { }
 
-  // Simulate GET /product.
+  // Log ProductService messages.
+  private log(message: string) {
+    this.messageService.add('ProductService: ' + message);
+  }
+
+ /**
+ * Handle Http operation that failed.
+ * Let the app continue.
+ * @param operation - name of the operation that failed
+ * @param result - optional value to return as the observable result
+ */
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // @TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // @TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+
+  // Simulate GET /products from the server.
   get products(): Observable<Product[]> {
-    this.messageService.add('ProductService: fetched products');
-    return of (this._products);
+    return this.http.get<Product[]>(this.productsUrl)
+    .pipe(
+      tap(heroes => this.log(`fetched products`)),
+      catchError(this.handleError('get products method', []))
+    );
   }
 
   // Toggle checked status.

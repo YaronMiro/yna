@@ -34,7 +34,7 @@ export class ProductsComponent implements OnInit {
 
   // Set editor to "add" or "Edit" mode.
   setEditorMode(product?: Product): void {
-    this.selectedProduct = product.id ? product : null
+    this.selectedProduct = product.id ? product : null;
     this.editorMode = true;
   }
 
@@ -45,7 +45,12 @@ export class ProductsComponent implements OnInit {
 
   // Add product.
   add(product: Product): void {
-    this.productService.add(this.newProduct);
+    const newTitle = this.productService.sinitizeString(product.title);
+    // Exit early in case title is empty
+    if (!newTitle) {
+      return;
+    }
+    this.productService.add(product);
     this.resetEditor();
   }
 
@@ -58,8 +63,13 @@ export class ProductsComponent implements OnInit {
   }
 
   // Update product.
-  updateProduct(product: Product): void {
-    this.productService.updateProduct(product.id, {title: product.title});
+  update(product: Product): void {
+    const newTitle = this.productService.sinitizeString(product.title);
+    // Exit early in case title is empty
+    if (!newTitle) {
+      return;
+    }
+    this.productService.update(product.id, {title: newTitle});
     this.resetEditor();
   }
 

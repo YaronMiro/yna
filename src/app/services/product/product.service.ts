@@ -19,7 +19,7 @@ export class ProductService {
 
   // Toggle checked status.
   toggleCheckedStatus(product: Product): Product {
-    const updatedProduct = this.updateProduct(product.id, {
+    const updatedProduct = this.update(product.id, {
       isChecked: !product.isChecked
     });
     return updatedProduct;
@@ -47,13 +47,20 @@ export class ProductService {
   }
 
   // Simulate PUT /product/:id
-  updateProduct(id: number, values: Object = {}): Product {
+  update(id: number, values: Object = {}): Product {
     const product = this.getProduct(id);
     if (!product) {
       return null;
     }
     Object.assign(product, values);
     return product;
+  }
+
+  // Sinitize any given string.
+  // making sure the string is valid.
+  sinitizeString(value: string): string | null {
+    const cleanValue = value.trim();
+    return cleanValue.length ? cleanValue : null;
   }
 
   constructor() { }

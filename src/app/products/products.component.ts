@@ -22,6 +22,9 @@ export class ProductsComponent implements OnInit {
   // Flag for editor mode.
   editorMode = false;
 
+  // The current selected product.
+  selectedProductId: number | null = null;
+
   constructor(private productService: ProductService) {}
 
   ngOnInit() {
@@ -29,8 +32,11 @@ export class ProductsComponent implements OnInit {
     this.products = this.productService.products;
   }
 
-  // Set the status when adding/editing product's title.
-  setModeToEditor() {
+  // Set mode when adding/editing product's title.
+  setModeToEditor(id?: number) {
+    if (id) {
+      this.selectedProductId = id;
+    }
     this.editorMode = true;
   }
 

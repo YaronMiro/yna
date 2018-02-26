@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Run `ng serve --host 0.0.0.0 --open` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve --host 0.0.0.0 --open` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically open on the browser and reloads if you change any of the source files.
 
 ##### In case `livereload` is not working on your dev enviroment: #####
 
@@ -19,12 +19,3 @@ Run `ng serve --prod` to test the production code on a local server
 ##### Push production build to `gh-pages` #####
 Install [angular-cli-ghpages](https://github.com/angular-schule/angular-cli-ghpages) by running the `npm i -g angular-cli-ghpages` command
 run `ng build --prod --base-href https://yaronmiro.github.io/yna/ && ngh`
-
-
-<!-- ## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/). -->

@@ -12,6 +12,8 @@ export class ProductService {
   // The products collection.
   private _products: Product[] = [];
 
+  constructor() { }
+
   // Simulate GET /product.
   get products(): Product[] {
     return this._products;
@@ -62,7 +64,5 @@ export class ProductService {
     const cleanValue = value.trim();
     return cleanValue.length ? cleanValue : null;
   }
-
-  constructor() { }
 
 }

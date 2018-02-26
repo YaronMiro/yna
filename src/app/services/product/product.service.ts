@@ -33,16 +33,16 @@ export class ProductService {
  /**
  * Handle Http operation that failed.
  * Let the app continue.
- * @param operation - name of the operation that failed
- * @param result - optional value to return as the observable result
+ * @param operation - name of the operation that failed.
+ * @param result - optional value to return as the observable result.
  */
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
-      // @TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+      // @TODO: send the error to remote logging infrastructure.
+      console.error(error);
 
-      // @TODO: better job of transforming error for user consumption
+      // @TODO: better job of transforming error for user consumption.
       this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
@@ -55,7 +55,7 @@ export class ProductService {
     return this.http.get<Product[]>(this.productsUrl)
     .pipe(
       tap(heroes => this.log(`fetched products`)),
-      catchError(this.handleError('get products method', []))
+      catchError(this.handleError('get products from server', []))
     );
   }
 
@@ -83,9 +83,11 @@ export class ProductService {
 
   // Simulate GET /product/:id
   get(id: number): Observable<Product> {
-    // Todo: send the message _after_ fetching the hero
-    this.messageService.add(`ProductService: fetched product id=${id}`);
-    return of(this._products.find(product => product.id === id));
+    const url = `${this.productsUrl}/${id}`;
+    return this.http.get<Product>(url).pipe(
+      tap(_ => this.log(`fetched product id=${id}`)),
+      catchError(this.handleError<Product>(`get product id=${id}`))
+    );
   }
 
   // Simulate DELETE /product/:id

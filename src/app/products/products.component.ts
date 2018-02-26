@@ -50,6 +50,7 @@ export class ProductsComponent implements OnInit {
     if (!newTitle) {
       return;
     }
+    product.title = newTitle;
     this.productService.add(product);
     this.resetEditor();
   }

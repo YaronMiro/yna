@@ -87,7 +87,9 @@
             border-bottom: $border-base-style-light
 
         &:focus
+            color: $text
             outline: 0
+            border-bottom: $border-base-style-text
 
 
     .product__delete__btn
@@ -109,6 +111,8 @@
             +respond-at($breakpoint-M)
                 border-bottom: $border-base-style-light
 
+                &:focus
+                    border-bottom: $border-base-style-text
 
     /* Style elements when a product is been edited/added (active) */
     &.editor__mode

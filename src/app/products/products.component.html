@@ -9,20 +9,20 @@
       <!-- Display checked product title -->
       <label class="product__checked__title" for="product-id-{{ product.id }}" *ngIf="product.isChecked">{{ product.title }}</label>
       <!-- Edit exsisting product field -->
-      <input id="product-id-{{ product.id }}" type="text" class="product__title__input__field" *ngIf="!product.isChecked" [(ngModel)]="product.title" (focus)="setEditorMode(product)" (input)="update(product)">
+      <input id="product-id-{{ product.id }}" type="text" class="product__title__input__field" *ngIf="!product.isChecked" [(ngModel)]="product.title" (focus)="setEditorMode(product)">
       <!-- Delete product button -->
       <button class="product__delete__btn" (click)="delete(product.id)">x</button>
     </li>
   </ul>
-  <!-- Add product field -->
+  <!-- Add new product field -->
   <input type="text" class="add__new__product__field" placeholder="Add Item" (focus)="setEditorMode(newProduct)" (keyup.enter)="add(newProduct)" [(ngModel)]="newProduct.title">
 </section>
 <!-- View product detail fields -->
 <app-product-detail [product]="selectedProduct"></app-product-detail>
 
-<!-- <pre style="display: block; clear: both">
+<pre style="display: block; clear: both">
   <h4 *ngIf="isSelectedProduct">Selected Product ID: {{ selectedProduct | json }}</h4>
   <h4>Number of products: {{ products.length }}</h4>
   <strong>Products list:</strong>
   {{ products | json }}
-</pre> -->
+</pre>

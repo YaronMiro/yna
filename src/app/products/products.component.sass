@@ -3,12 +3,13 @@
 .products
     margin: 0 auto
     border: $border-base-style-light
+    margin-bottom: 20px
 
     +respond-at($breakpoint-M)
+        float: left
         display: block
         width: 300px
         min-height: 260px
-
 
     .products__title
         +main-title-style()
@@ -28,7 +29,6 @@
         &.active
             border-bottom: $border-base-style-text
 
-
     /* Use images for the checkbox input
      * in order to match cross browser styling.
      */
@@ -37,7 +37,7 @@
 
         &+.product__check__btn
             display: inline-block
-            width: 7%
+            width: 18px
             height: 13px
             vertical-align: middle
             cursor: pointer
@@ -46,7 +46,6 @@
                 repeat: no-repeat
                 size: 12px 13px
 
-        
         &:checked + .product__check__btn
             background:
                 image: url(/assets/images/checked.jpg)
@@ -86,8 +85,13 @@
         color: $light-text
         text-transform: capitalize
 
+        +respond-at($breakpoint-M)
+            border-bottom: $border-base-style-light
+
         &:focus
+            color: $text
             outline: 0
+            border-bottom: $border-base-style-text
 
 
     .product__delete__btn
@@ -103,16 +107,15 @@
 
     /* Style elements when the are no products */
     &.no__products
+        .products__title
+            border-bottom: $border-base-style-light
+
+
         .add__new__product__field
-            padding-left: 10px
+            padding: 21px 0 10px 10px
 
             +respond-at($breakpoint-M)
                 border-bottom: $border-base-style-light
 
-
-    /* Style elements when a product is been edited/added (active) */
-    &.add__or__edit__product
-        margin-bottom: 20px
-
-        +respond-at($breakpoint-M)
-            float: left
+                &:focus
+                    border-bottom: $border-base-style-text

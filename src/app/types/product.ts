@@ -1,20 +1,24 @@
 /**
-* Declare the Product type structure.
+* The Product type structure.
 *
-* @property id: Product ID - existing product: number || new product: null.
-* @property title: Product title - existing product: string || new product: null.
-* @property isChecked: Flag to mark the product as isCheckedd.
+* @property id: Product ID.
+* @property title: Product title.
+* @property isChecked: Flag to mark the product as checked.
 * @property quantity: Product quantity.
 * @property price: Product price.
 * @property description: Product description.
 * @type Product
 * @return Product {object}
 */
-export interface Product {
-    id: number | null;
-    title: string | null;
-    isChecked: boolean;
-    quantity?: number;
-    price?: string;
-    description?: string;
+export class Product {
+    id: number;
+    title = '';
+    isChecked = false;
+    quantity?: string | null = null;
+    price?: string | null = null;
+    description?: string | null = null;
+
+    constructor(values: Object = {}) {
+        Object.assign(this, values);
+      }
 }

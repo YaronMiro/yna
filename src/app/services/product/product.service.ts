@@ -16,8 +16,8 @@ export class ProductService {
 
   // The products collection.
   private _products: Product[] = [
-    // new Product({id: 1, title: 'test me'}),
-    // new Product({id: 2, title: 'test me-2'}),
+    new Product({id: 1, title: 'test me'}),
+    new Product({id: 2, title: 'test me-2'}),
   ];
 
   constructor(private messageService: MessageService) { }
@@ -44,22 +44,31 @@ export class ProductService {
   }
 
   // Simulate GET /product/:id
-  get(id: number): Product {
-    return this._products
-      .filter((product) => product.id === id)
-      .pop();
+  // get(id: number): Product {
+  //   return this._products
+  //     .filter((product) => product.id === id)
+  //     .pop();
+  // }
+
+  // Simulate GET /product/:id
+  get(id: number): Observable<Product> {
+    // Todo: send the message _after_ fetching the hero
+    this.messageService.add(`ProductService: fetched product id=${id}`);
+    return of(this._products.find(product => product.id === id));
   }
 
   // Simulate DELETE /product/:id
   delete(id: number): ProductService {
-    const product = this.get(id);
+    // REMOVE THIS!!
+    const product = new Product({title: 'REMOVE ME REFACOR!!', id: 100});
     this._products.splice(this._products.indexOf(product), 1);
     return this;
   }
 
   // Simulate PUT /product/:id
   update(id: number, values: Object = {}): Product {
-    const product = this.get(id);
+    // REMOVE THIS!!
+    const product = new Product({title: 'REMOVE ME REFACOR!!', id: 100});
     if (!product) {
       return null;
     }

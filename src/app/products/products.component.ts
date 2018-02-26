@@ -51,6 +51,11 @@ export class ProductsComponent implements OnInit {
     return this.products.length ? true : false;
   }
 
+  get(id: number): void {
+    this.productService.get(id)
+      .subscribe(product => this.selectedProduct = product);
+  }
+
   // Add product.
   add(product: Product): void {
     const newTitle = this.productService.sinitizeString(product.title);

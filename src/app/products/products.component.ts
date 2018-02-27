@@ -82,13 +82,18 @@ export class ProductsComponent implements OnInit {
 
   // Toggle the product "checked" status.
   toggleCheckedStatus(product: Product): void {
-    this.productService.update(product).subscribe(_ => this.resetEditor());
+    this.productService.update(product).subscribe(_ => this.editorMode = false);
   }
 
   // Delete product.
   delete(id: number): void {
     this.products = this.products.filter(prduct => id !== prduct.id);
-    this.productService.delete(id).subscribe();
+    this.productService.delete(id).subscribe(_ => {
+      if (id === this.selectedProduct.id) {
+        this.selectedProduct = null;
+        this.editorMode = false;
+      }
+    });
   }
 
   // Reset the editor.

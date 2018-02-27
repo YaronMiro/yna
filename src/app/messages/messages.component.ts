@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { MessageService } from './../services/message/message.service';
 
+import { environment } from './../../environments/environment';
+
 
 @Component({
   selector: 'app-messages',
@@ -10,7 +12,9 @@ import { MessageService } from './../services/message/message.service';
 })
 export class MessagesComponent implements OnInit {
 
-  constructor(public messageService: MessageService) { }
+  private enviromentProduction = environment.production;
+
+  constructor(public messageService: MessageService) {}
 
   ngOnInit() {
   }

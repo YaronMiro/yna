@@ -5,6 +5,9 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { environment } from './../../../environments/environment';
+
+
 
 import { Product } from './../../types/product';
 import { MessageService } from './../../services/message/message.service';
@@ -19,7 +22,7 @@ export class ProductService {
   // URL to a web API.
   private productsUrl = '/api/products';
 
-  constructor(private messageService: MessageService, private http: HttpClient) { }
+  constructor(private messageService: MessageService, private http: HttpClient) {}
 
   // Simulate GET /products from the server.
   getProducts(): Observable<Product[]> {
@@ -83,7 +86,9 @@ export class ProductService {
       console.error(error);
 
       // @TODO: better job of transforming error for user consumption.
-      this.log(`${operation} failed: ${error.message}`);
+      if (!environment.production) {
+        this.log(`${operation} failed: ${error.message}`);
+      }
 
       // Let the app keep running by returning an empty result.
       return of(result as T);

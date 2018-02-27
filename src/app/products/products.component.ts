@@ -37,14 +37,13 @@ export class ProductsComponent implements OnInit {
     this.getProducts();
 
     this.productUpdatedTitle$ = this.fieldValue.pipe(
-      // wait 500ms after each keystroke before considering the input value.
+      // wait 1000ms after each keystroke before considering the input value.
       debounceTime(1000),
 
       // ignore new input value if same as previous input value.
       distinctUntilChanged(),
 
       // switch to new input value observable each time the term changes
-      // switchMap( (value: string) => this.productService.updateProductField(value)
       switchMap( (value: string) => this.updateProductTitle(value)
       ),
     );
@@ -82,7 +81,7 @@ export class ProductsComponent implements OnInit {
     this.productService.update(produt).subscribe();
   }
 
-  // Update product title when user stop typing.
+  // Update product title when user actually stop typing.
   updateProductTitle (value: string) {
     this.selectedProduct.title = value;
     return this.productService.update(this.selectedProduct);

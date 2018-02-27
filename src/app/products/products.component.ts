@@ -17,9 +17,6 @@ export class ProductsComponent implements OnInit {
   // New product placeholder.
   newProduct: Product = new Product();
 
-  // Flag for editor mode.
-  editorMode = false;
-
   // The current selected product.
   selectedProduct: Product | null = null;
 
@@ -51,7 +48,8 @@ export class ProductsComponent implements OnInit {
     this.productService.add(product)
       .subscribe(newProduct => {
         this.products.push(newProduct);
-        this.resetEditor();
+        this.newProduct = new Product();
+        this.selectedProduct = null;
       });
   }
   // Update product.
@@ -64,7 +62,6 @@ export class ProductsComponent implements OnInit {
     this.productService.update(product).subscribe(_ => {
       if (this.selectedProduct && product.id === this.selectedProduct.id) {
         this.selectedProduct = null;
-        this.editorMode = false;
       }
     });
   }
@@ -75,7 +72,6 @@ export class ProductsComponent implements OnInit {
     this.productService.delete(id).subscribe(_ => {
       if (this.selectedProduct && this.selectedProduct.id === id) {
         this.selectedProduct = null;
-        this.editorMode = false;
       }
     });
   }
@@ -83,12 +79,6 @@ export class ProductsComponent implements OnInit {
   // Set editor to "add" or "Edit" mode.
   setEditorMode(product?: Product): void {
     this.selectedProduct = product.id ? product : null;
-    this.editorMode = true;
-  }
-
-  // Check if we are in editor mode.
-  isEditorMode(): boolean {
-    return this.editorMode;
   }
 
   // Check if this is the selected product.
@@ -99,14 +89,6 @@ export class ProductsComponent implements OnInit {
   // Check if there are any products.
   hasProducts(): boolean {
     return (this.products && this.products.length) ? true : false;
-  }
-
-  // Reset the editor.
-  resetEditor(): void {
-    // Reset the editor to "add" new product mode.
-    this.newProduct = new Product();
-    this.selectedProduct = null;
-    this.editorMode = false;
   }
 
 }

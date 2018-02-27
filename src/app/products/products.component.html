@@ -1,3 +1,10 @@
+<input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+
+  <ul class="search-result">
+    <li *ngFor="let hero of heroes$ | async" >{{hero | json}}</li>
+  </ul>
+
+
 <section class="products" [ngClass]="{'no__products': !hasAnyProducts()}">
   <h2 class="products__title">Add your items here</h2>
   <!-- List of Products -->

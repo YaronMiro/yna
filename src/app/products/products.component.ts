@@ -52,8 +52,7 @@ export class ProductsComponent implements OnInit {
 
   // Check if there are any products.
   hasProducts(): boolean {
-    // return this.products.length ? true : false;
-    return true;
+    return (this.products && this.products.length) ? true : false;
   }
 
   // Get product.
@@ -76,10 +75,9 @@ export class ProductsComponent implements OnInit {
         this.resetEditor();
       });
   }
-
   // Update product.
-  update(): void {
-    this.productService.update(this.selectedProduct).subscribe();
+  update(produt: Product): void {
+    this.productService.update(produt).subscribe();
   }
 
   // Toggle the product "checked" status.

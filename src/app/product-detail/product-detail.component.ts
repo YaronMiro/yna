@@ -19,7 +19,6 @@ export class ProductDetailComponent implements OnInit {
     this.productService.update(this.product).subscribe();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

@@ -1,9 +1,8 @@
-<input #searchBox (keyup)="search(searchBox.value)" />
+<input #UpdateTitleField (keyup)="autoUpdateFieldInput(UpdateTitleField.value)" />
 
   <ul class="search-result">
-    <li *ngFor="let product of products$ | async" >{{product | json}}</li>
+    <li *ngFor="let product of productUpdatedTitle$ | async" >{{product | json}}</li>
   </ul>
-
 
 <section class="products" [ngClass]="{'no__products': !hasAnyProducts()}">
   <h2 class="products__title">Add your items here</h2>

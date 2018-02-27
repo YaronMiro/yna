@@ -17,9 +17,6 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 })
 export class ProductsComponent implements OnInit {
 
-  products$: Observable<Product[]>;
-  private fieldValue = new Subject<string>();
-
 
   // Products collection.
   products: Product[];
@@ -30,26 +27,24 @@ export class ProductsComponent implements OnInit {
   // The current selected product.
   selectedProduct: Product | null = null;
 
+  // The product updated title Observable.
+  productUpdatedTitle$: Observable<any>;
+  private fieldValue = new Subject<string>();
+
   constructor(private productService: ProductService) { }
-
-
-  // Push a search term into the observable stream.
-  search(term: string): void {
-    this.fieldValue.next(term);
-  }
 
   ngOnInit() {
     // Get all of the products.
     this.getProducts();
 
-    this.products$ = this.fieldValue.pipe(
-      // wait 1000ms after each keystroke before considering the term
+    this.productUpdatedTitle$ = this.fieldValue.pipe(
+      // wait 500ms after each keystroke before considering the input value.
       debounceTime(1000),
 
-      // ignore new term if same as previous term
+      // ignore new input value if same as previous input value.
       distinctUntilChanged(),
 
-      // switch to new search observable each time the term changes
+      // switch to new input value observable each time the term changes
       switchMap( (term: string) => this.productService.updateProductField(term)
       ),
     );
@@ -85,6 +80,11 @@ export class ProductsComponent implements OnInit {
   // Update product.
   update(produt: Product): void {
     this.productService.update(produt).subscribe();
+  }
+
+   // Push the field input into the observable stream.
+   autoUpdateFieldInput(term: string): void {
+    this.fieldValue.next(term);
   }
 
   // Toggle the product "checked" status.

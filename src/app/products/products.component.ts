@@ -48,7 +48,8 @@ export class ProductsComponent implements OnInit {
 
   // Check if there are any products.
   hasProducts(): boolean {
-    return this.products.length ? true : false;
+    // return this.products.length ? true : false;
+    return true;
   }
 
   get(id: number): void {
@@ -56,16 +57,14 @@ export class ProductsComponent implements OnInit {
       .subscribe(product => this.selectedProduct = product);
   }
 
-  // Add product.
   add(product: Product): void {
-    const newTitle = this.productService.sinitizeString(product.title);
-    // Exit early in case title is empty
-    if (!newTitle) {
-      return;
-    }
-    product.title = newTitle;
-    this.productService.add(product);
-    this.resetEditor();
+    product.title = product.title.trim();
+    if (!product.title) { return; }
+    this.productService.add(product)
+      .subscribe(newProduct => {
+        this.products.push(newProduct);
+        this.resetEditor();
+      });
   }
 
   // Reset the editor.
@@ -94,8 +93,13 @@ export class ProductsComponent implements OnInit {
 
   // Delete product.
   delete(id: number): void {
-    this.productService.delete(id);
-    this.resetEditor();
+    this.products = this.products.filter(prduct => id !== prduct.id);
+    this.productService.delete(id).subscribe();
   }
+
+  // delete(hero: Hero): void {
+  //   this.heroes = this.heroes.filter(h => h !== hero);
+  //   this.heroService.deleteHero(hero).subscribe();
+  // }
 
 }

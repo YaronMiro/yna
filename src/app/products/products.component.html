@@ -17,6 +17,12 @@
   <!-- Add new product field -->
   <input type="text" class="add__new__product__field" placeholder="Add Item" (focus)="setEditorMode(newProduct)" (keyup.enter)="add(newProduct)" [(ngModel)]="newProduct.title">
 </section>
+
+<pre style="display: block; clear: both">
+  <strong>Products list:</strong>
+  {{ products | json }}
+</pre>
+
 <!-- View product detail fields -->
 <app-product-detail [product]="selectedProduct"></app-product-detail>
 <app-messages></app-messages>

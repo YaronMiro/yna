@@ -9,13 +9,12 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Product } from './../../types/product';
 import { MessageService } from './../../services/message/message.service';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class ProductService {
-
-  // The "last ID" so we can simulate
-  // automatic incrementing of ID's.
-  private lastId = 0;
 
    // URL to a web API.
   private productsUrl = '/api/products';
@@ -54,8 +53,8 @@ export class ProductService {
   get products(): Observable<Product[]> {
     return this.http.get<Product[]>(this.productsUrl)
     .pipe(
-      tap(heroes => this.log(`fetched products`)),
-      catchError(this.handleError('get products from server', []))
+      tap(products => this.log(`Fetched products`)),
+      catchError(this.handleError('Get products from server', []))
     );
   }
 
@@ -68,34 +67,29 @@ export class ProductService {
   }
 
   // Simulate POST /product.
-  add(product: Product): ProductService {
-    product.id = product.id ? product.id : ++this.lastId;
-    this._products.push(new Product(product));
-    return this;
+  add(product: Product): Observable<Product> {
+    return this.http.post<Product>(this.productsUrl, product, httpOptions).pipe(
+      tap((newProduct: Product) => this.log(`Added product with id=${newProduct.id}`)),
+      catchError(this.handleError<Product>('Add product'))
+    );
   }
-
-  // Simulate GET /product/:id
-  // get(id: number): Product {
-  //   return this._products
-  //     .filter((product) => product.id === id)
-  //     .pop();
-  // }
 
   // Simulate GET /product/:id
   get(id: number): Observable<Product> {
     const url = `${this.productsUrl}/${id}`;
     return this.http.get<Product>(url).pipe(
-      tap(_ => this.log(`fetched product id=${id}`)),
-      catchError(this.handleError<Product>(`get product id=${id}`))
+      tap(_ => this.log(`Fetched product id=${id}`)),
+      catchError(this.handleError<Product>(`Get product id=${id}`))
     );
   }
 
   // Simulate DELETE /product/:id
-  delete(id: number): ProductService {
-    // REMOVE THIS!!
-    const product = new Product({title: 'REMOVE ME REFACOR!!', id: 100});
-    this._products.splice(this._products.indexOf(product), 1);
-    return this;
+  delete(id: number): Observable<Product> {
+    const url = `${this.productsUrl}/${id}`;
+    return this.http.delete<Product>(url, httpOptions).pipe(
+      tap(_ => this.log(`Deleted product id=${id}`)),
+      catchError(this.handleError<Product>('Deleted Product'))
+    );
   }
 
   // Simulate PUT /product/:id

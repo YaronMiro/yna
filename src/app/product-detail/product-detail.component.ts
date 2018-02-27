@@ -14,11 +14,6 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(private productService: ProductService) {  }
 
-    // Update product details.
-    update(product: Product): void {
-      this.productService.update(product.id, product);
-    }
-
   ngOnInit() {
   }
 

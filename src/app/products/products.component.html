@@ -1,7 +1,7 @@
-<input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+<input #searchBox (keyup)="search(searchBox.value)" />
 
   <ul class="search-result">
-    <li *ngFor="let hero of heroes$ | async" >{{hero | json}}</li>
+    <li *ngFor="let product of products$ | async" >{{product | json}}</li>
   </ul>
 
 

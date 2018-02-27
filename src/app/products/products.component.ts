@@ -34,27 +34,6 @@ export class ProductsComponent implements OnInit {
     this.productService.getProducts().subscribe(products => this.products = products);
   }
 
-  // Set editor to "add" or "Edit" mode.
-  setEditorMode(product?: Product): void {
-    this.selectedProduct = product.id ? product : null;
-    this.editorMode = true;
-  }
-
-  // Check if we are in editor mode.
-  isEditorMode(): boolean {
-    return this.editorMode;
-  }
-
-  // Check if this is the selected product.
-  isSelectedProduct(id: number): boolean {
-    return (this.selectedProduct && this.selectedProduct.id === id);
-  }
-
-  // Check if there are any products.
-  hasProducts(): boolean {
-    return (this.products && this.products.length) ? true : false;
-  }
-
   // Get product.
   get(id: number): void {
     this.productService.get(id)
@@ -82,18 +61,47 @@ export class ProductsComponent implements OnInit {
 
   // Toggle the product "checked" status.
   toggleCheckedStatus(product: Product): void {
-    this.productService.update(product).subscribe(_ => this.editorMode = false);
+    this.productService.update(product).subscribe(_ => {
+      console.log('selected', this.selectedProduct);
+      console.log('id', product.id);
+      console.log('isChecked', product.isChecked);
+      if (this.selectedProduct && product.id === this.selectedProduct.id) {
+        this.selectedProduct = null;
+        this.editorMode = false;
+      }
+    });
   }
 
   // Delete product.
   delete(id: number): void {
     this.products = this.products.filter(prduct => id !== prduct.id);
     this.productService.delete(id).subscribe(_ => {
-      if (id === this.selectedProduct.id) {
+      if (this.selectedProduct && this.selectedProduct.id === id) {
         this.selectedProduct = null;
         this.editorMode = false;
       }
     });
+  }
+
+  // Set editor to "add" or "Edit" mode.
+  setEditorMode(product?: Product): void {
+    this.selectedProduct = product.id ? product : null;
+    this.editorMode = true;
+  }
+
+  // Check if we are in editor mode.
+  isEditorMode(): boolean {
+    return this.editorMode;
+  }
+
+  // Check if this is the selected product.
+  isSelectedProduct(id: number): boolean {
+    return (this.selectedProduct && this.selectedProduct.id === id);
+  }
+
+  // Check if there are any products.
+  hasProducts(): boolean {
+    return (this.products && this.products.length) ? true : false;
   }
 
   // Reset the editor.

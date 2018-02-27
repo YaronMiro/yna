@@ -62,9 +62,6 @@ export class ProductsComponent implements OnInit {
   // Toggle the product "checked" status.
   toggleCheckedStatus(product: Product): void {
     this.productService.update(product).subscribe(_ => {
-      console.log('selected', this.selectedProduct);
-      console.log('id', product.id);
-      console.log('isChecked', product.isChecked);
       if (this.selectedProduct && product.id === this.selectedProduct.id) {
         this.selectedProduct = null;
         this.editorMode = false;

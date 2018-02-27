@@ -12,7 +12,12 @@ export class ProductDetailComponent implements OnInit {
 
   @Input() product: Product;
 
-  constructor(private productService: ProductService) {  }
+  constructor(private productService: ProductService) { }
+
+  // Update product.
+  update(): void {
+    this.productService.update(this.product).subscribe();
+  }
 
   ngOnInit() {
   }

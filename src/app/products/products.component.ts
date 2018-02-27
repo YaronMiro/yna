@@ -26,15 +26,13 @@ export class ProductsComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
   ngOnInit() {
-    // Get all exisiting products.
-    this.productService.products.subscribe(products => this.products = products);
+    this.getProducts();
   }
 
   // Get all products.
-  // getAll() {
-  //   this.productService.products.subscribe(products => this.products = products);
-  // }
-
+  getProducts() {
+    this.productService.getProducts().subscribe(products => this.products = products);
+  }
 
   // Set editor to "add" or "Edit" mode.
   setEditorMode(product?: Product): void {

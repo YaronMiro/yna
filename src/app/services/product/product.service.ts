@@ -58,26 +58,12 @@ export class ProductService {
 
   // Simulate PUT /product/:id
   update(product: Product): Observable<any> {
+    console.log('from debounce: ', product.title);
     return this.http.put(this.productsUrl, product, httpOptions).pipe(
       tap(_ => this.log(`updated product id=${product.id}`)),
       catchError(this.handleError<any>('Updated product failed'))
     );
   }
-
-  // remove this.
-  updateProductField(term: string): Observable<Product[]> {
-    if (!term.trim()) {
-      // if not search term, return empty hero array.
-      return of([]);
-    }
-    console.log('from debounce: ', term);
-    // return of([]);
-    return this.http.get<Product[]>(`api/products/?title=${term}`).pipe(
-      tap(_ => this.log(`found heroes matching "${term}"`)),
-      catchError(this.handleError<Product[]>('searchHeroes', []))
-    );
-  }
-
 
   // Log ProductService messages.
   private log(message: string) {

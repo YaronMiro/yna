@@ -17,7 +17,6 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 })
 export class ProductsComponent implements OnInit {
 
-
   // Products collection.
   products: Product[];
 
@@ -45,7 +44,8 @@ export class ProductsComponent implements OnInit {
       distinctUntilChanged(),
 
       // switch to new input value observable each time the term changes
-      switchMap( (term: string) => this.productService.updateProductField(term)
+      // switchMap( (value: string) => this.productService.updateProductField(value)
+      switchMap( (value: string) => this.updateProductTitle(value)
       ),
     );
   }
@@ -81,6 +81,13 @@ export class ProductsComponent implements OnInit {
   update(produt: Product): void {
     this.productService.update(produt).subscribe();
   }
+
+  // Update product title when user stop typing.
+  updateProductTitle (value: string) {
+    this.selectedProduct.title = value;
+    return this.productService.update(this.selectedProduct);
+  }
+
 
    // Push the field input into the observable stream.
    autoUpdateFieldInput(term: string): void {

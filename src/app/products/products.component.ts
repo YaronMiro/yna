@@ -23,6 +23,8 @@ export class ProductsComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
   ngOnInit() {
+
+    // Get all of the products.
     this.getProducts();
   }
 
@@ -40,7 +42,7 @@ export class ProductsComponent implements OnInit {
   // Add product.
   add(product: Product): void {
     product.title = product.title.trim();
-    // Exit eraly in case title is empty
+    // Exit eraly in case title is empty.
     if (!product.title) {
       return;
     }
@@ -52,6 +54,7 @@ export class ProductsComponent implements OnInit {
         this.selectedProduct = null;
       });
   }
+
   // Update product.
   update(produt: Product): void {
     this.productService.update(produt).subscribe();
@@ -60,6 +63,7 @@ export class ProductsComponent implements OnInit {
   // Toggle the product "checked" status.
   toggleCheckedStatus(product: Product): void {
     this.productService.update(product).subscribe(_ => {
+      // Reset the selectd product in case it's the on been "checked".
       if (this.selectedProduct && product.id === this.selectedProduct.id) {
         this.selectedProduct = null;
       }
@@ -87,7 +91,7 @@ export class ProductsComponent implements OnInit {
   }
 
   // Check if there are any products.
-  hasProducts(): boolean {
+  hasAnyProducts(): boolean {
     return (this.products && this.products.length) ? true : false;
   }
 

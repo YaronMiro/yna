@@ -17,28 +17,79 @@ export class ProductsComponent implements OnInit {
   // New product placeholder.
   newProduct: Product = new Product();
 
-  // Flag for editor mode.
-  editorMode = false;
-
   // The current selected product.
   selectedProduct: Product | null = null;
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService) { }
 
   ngOnInit() {
-    // Get all exisiting products.
-    this.products = this.productService.products;
+
+    // Get all of the products.
+    this.getProducts();
+  }
+
+  // Get all products.
+  getProducts() {
+    this.productService.getProducts().subscribe(products => this.products = products);
+  }
+
+  // Get product.
+  get(id: number): void {
+    this.productService.get(id)
+      .subscribe(product => this.selectedProduct = product);
+  }
+
+  // Add product.
+  add(product: Product): void {
+    product.title = product.title.trim();
+    // Exit eraly in case title is empty.
+    if (!product.title) {
+      return;
+    }
+
+    this.productService.add(product)
+      .subscribe(newProduct => {
+        this.products.push(newProduct);
+        this.newProduct = new Product();
+        this.selectedProduct = null;
+      });
+  }
+
+  // Update product.
+  update(produt: Product): void {
+
+  /* @TODO [Preformence]
+   * Change update of procut title to use "Observable" and "debounceTime"
+   * reduce request to the server on every key stroke, send request
+   * only when the user actually stpoed typing or just add a "save"
+   * button instead.
+  */
+    this.productService.update(produt).subscribe();
+  }
+
+  // Toggle the product "checked" status.
+  toggleCheckedStatus(product: Product): void {
+    this.productService.update(product).subscribe(_ => {
+      // Reset the selectd product in case it's the on been "checked".
+      if (this.selectedProduct && product.id === this.selectedProduct.id) {
+        this.selectedProduct = null;
+      }
+    });
+  }
+
+  // Delete product.
+  delete(id: number): void {
+    this.products = this.products.filter(prduct => id !== prduct.id);
+    this.productService.delete(id).subscribe(_ => {
+      if (this.selectedProduct && this.selectedProduct.id === id) {
+        this.selectedProduct = null;
+      }
+    });
   }
 
   // Set editor to "add" or "Edit" mode.
   setEditorMode(product?: Product): void {
     this.selectedProduct = product.id ? product : null;
-    this.editorMode = true;
-  }
-
-  // Check if we are in editor mode.
-  isEditorMode(): boolean {
-    return this.editorMode;
   }
 
   // Check if this is the selected product.
@@ -47,50 +98,8 @@ export class ProductsComponent implements OnInit {
   }
 
   // Check if there are any products.
-  hasProducts(): boolean {
-    return this.products.length ? true : false;
-  }
-
-  // Add product.
-  add(product: Product): void {
-    const newTitle = this.productService.sinitizeString(product.title);
-    // Exit early in case title is empty
-    if (!newTitle) {
-      return;
-    }
-    product.title = newTitle;
-    this.productService.add(product);
-    this.resetEditor();
-  }
-
-  // Reset the editor.
-  resetEditor(): void {
-    // Reset the editor to "add" new product mode.
-    this.newProduct = new Product();
-    this.selectedProduct = null;
-    this.editorMode = false;
-  }
-
-  // Update product.
-  update(product: Product): void {
-    const newTitle = this.productService.sinitizeString(product.title);
-    // Exit early in case title is empty
-    if (!newTitle) {
-      return;
-    }
-    this.productService.update(product.id, {title: newTitle});
-  }
-
-  // Toggle the product "checked" status.
-  toggleCheckedStatus(product: Product): void {
-    this.productService.toggleCheckedStatus(product);
-    this.resetEditor();
-  }
-
-  // Delete product.
-  delete(id: number): void {
-    this.productService.delete(id);
-    this.resetEditor();
+  hasAnyProducts(): boolean {
+    return (this.products && this.products.length) ? true : false;
   }
 
 }

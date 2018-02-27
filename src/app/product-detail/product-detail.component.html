@@ -1,21 +1,21 @@
-<section class="product__detail" *ngIf="product" >
+<section class="product__detail" *ngIf="product">
   <!-- Title for adding a new product -->
   <h2 class="product__detail__title" *ngIf="product.id">{{ product.title }} details</h2>
   <div class="product__fields">
     <!-- Quantity field  -->
     <div class="product__field__container">
       <label class="product__field__label" for="quantity">quantity</label>
-      <input id="quantity" class="product__field" type="text" title="The number of items" [(ngModel)]="product.quantity">
+      <input id="quantity" class="product__field" type="text" title="The number of items" [(ngModel)]="product.quantity" (keyup)="update(product)">
     </div>
     <!-- Price field  -->
     <div class="product__field__container">
       <label class="product__field__label" for="quantity">price</label>
-      <input id="price" class="product__field" type="text" title="The item price" [(ngModel)]="product.price">
+      <input id="price" class="product__field" type="text" title="The item price" [(ngModel)]="product.price" (keyup)="update(product)">
     </div>
     <!-- Description field  -->
     <div class="product__field__container">
       <label class="product__field__label" for="quantity">description</label>
-      <textarea id="description" class="product__field field__description" title="The item description" [(ngModel)]="product.description"></textarea>
+      <textarea id="description" class="product__field field__description" title="The item description" [(ngModel)]="product.description" (keyup)="update(product)"></textarea>
     </div>
   </div>
 </section>

@@ -1,81 +1,92 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import { catchError, map, tap } from 'rxjs/operators';
+
 
 import { Product } from './../../types/product';
+import { MessageService } from './../../services/message/message.service';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class ProductService {
 
-  // The "last ID" so we can simulate
-  // automatic incrementing of ID's.
-  private lastId = 0;
+  // URL to a web API.
+  private productsUrl = '/api/products';
 
-  // The products collection.
-  private _products: Product[] = [];
+  constructor(private messageService: MessageService, private http: HttpClient) { }
 
-  constructor() { }
-
-  // Simulate GET /product.
-  get products(): Product[] {
-    return this._products;
-  }
-
-  // Toggle checked status.
-  toggleCheckedStatus(product: Product): Product {
-    const updatedProduct = this.update(product.id, {
-      isChecked: !product.isChecked
-    });
-    return updatedProduct;
+  // Simulate GET /products from the server.
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.productsUrl).pipe(
+      tap(products => this.log(`Fetched products`)),
+      catchError(this.handleError('Get products from server', []))
+    );
   }
 
   // Simulate POST /product.
-  add(product: Product): ProductService {
-    product.id = product.id ? product.id : ++this.lastId;
-    this._products.push(new Product(product));
-    return this;
+  add(product: Product): Observable<Product> {
+    return this.http.post<Product>(this.productsUrl, product, httpOptions).pipe(
+      tap((newProduct: Product) => this.log(`Added product with id=${newProduct.id}`)),
+      catchError(this.handleError<Product>('Add product failed'))
+    );
   }
 
   // Simulate GET /product/:id
-  get(id: number): Product {
-    return this._products
-      .filter((product) => product.id === id)
-      .pop();
+  get(id: number): Observable<Product> {
+    const url = `${this.productsUrl}/${id}`;
+    return this.http.get<Product>(url).pipe(
+      tap(_ => this.log(`Fetched product id=${id}`)),
+      catchError(this.handleError<Product>(`Get product id=${id} failed`))
+    );
   }
 
   // Simulate DELETE /product/:id
-  delete(id: number): ProductService {
+  delete(id: number): Observable<Product> {
+    const url = `${this.productsUrl}/${id}`;
 
-    // this._products = this._products
-    //   .filter((product) => product.id !== id);
-    // return this;
-
-    let index = 0;
-    // Keep the array reference.
-    for (const product of this._products) {
-      if (product.id === id) {
-        break;
-      }
-      index++;
-    }
-    this._products.splice(index, 1);
-
-    return this;
+    return this.http.delete<Product>(url, httpOptions).pipe(
+      tap(_ => this.log(`Deleted product id=${id}`)),
+      catchError(this.handleError<Product>('Deleted Product failed'))
+    );
   }
 
   // Simulate PUT /product/:id
-  update(id: number, values: Object = {}): Product {
-    const product = this.get(id);
-    if (!product) {
-      return null;
-    }
-    Object.assign(product, values);
-    return product;
+  update(product: Product): Observable<any> {
+    return this.http.put(this.productsUrl, product, httpOptions).pipe(
+      tap(_ => this.log(`updated product id=${product.id}`)),
+      catchError(this.handleError<any>('Updated product failed'))
+    );
   }
 
-  // Sinitize any given string.
-  // making sure the string is valid.
-  sinitizeString(value: string): string | null {
-    const cleanValue = value.trim();
-    return cleanValue.length ? cleanValue : null;
+  // Log ProductService messages.
+  private log(message: string) {
+    this.messageService.add('ProductService: ' + message);
+  }
+
+  /**
+  * Handle Http operation that failed.
+  * Let the app continue.
+  * @param operation - name of the operation that failed.
+  * @param result - optional value to return as the observable result.
+  */
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // @TODO: send the error to remote logging infrastructure.
+      console.error(error);
+
+      // @TODO: better job of transforming error for user consumption.
+      this.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 
 }

@@ -12,14 +12,19 @@ export class ProductDetailComponent implements OnInit {
 
   @Input() product: Product;
 
-  constructor(private productService: ProductService) {  }
+  constructor(private productService: ProductService) { }
 
-    // Update product details.
-    update(product: Product): void {
-      this.productService.update(product.id, product);
-    }
-
-  ngOnInit() {
+  // Update product.
+  update(): void {
+  /* @TODO [Preformence]
+   * Change update of procut title to use "Observable" and "debounceTime"
+   * reduce request to the server on every key stroke, send request
+   * only when the user actually stpoed typing or just add a "save"
+   * button instead.
+  */
+    this.productService.update(this.product).subscribe();
   }
+
+  ngOnInit() { }
 
 }

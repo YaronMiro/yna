@@ -1,7 +1,7 @@
-<section class="products" [ngClass]="{'no__products': !hasProducts()}">
+<section class="products" [ngClass]="{'no__products': !hasAnyProducts()}">
   <h2 class="products__title">Add your items here</h2>
   <!-- List of Products -->
-  <ul class="products__list" *ngIf="products.length">
+  <ul class="products__list" *ngIf="hasAnyProducts()">
     <li *ngFor="let product of products" class="products__list__item" [ngClass]="{'active': isSelectedProduct(product.id)}">
       <!-- Togole product status button -->
       <input id="check-product-{{ product.id }}" class="product__checkbox" type="checkbox" (click)="toggleCheckedStatus(product)" [(ngModel)]="product.isChecked">
@@ -9,7 +9,7 @@
       <!-- Display checked product title -->
       <label class="product__checked__title" for="product-id-{{ product.id }}" *ngIf="product.isChecked">{{ product.title }}</label>
       <!-- Edit exsisting product field -->
-      <input id="product-id-{{ product.id }}" type="text" class="product__title__input__field" *ngIf="!product.isChecked" [(ngModel)]="product.title" (focus)="setEditorMode(product)">
+      <input id="product-id-{{ product.id }}" type="text" class="product__title__input__field" #productTitle *ngIf="!product.isChecked" [(ngModel)]="product.title" (keyup)="update(product)" (focus)="setEditorMode(product)">
       <!-- Delete product button -->
       <button class="product__delete__btn" (click)="delete(product.id)">x</button>
     </li>
@@ -17,5 +17,7 @@
   <!-- Add new product field -->
   <input type="text" class="add__new__product__field" placeholder="Add Item" (focus)="setEditorMode(newProduct)" (keyup.enter)="add(newProduct)" [(ngModel)]="newProduct.title">
 </section>
+
 <!-- View product detail fields -->
 <app-product-detail [product]="selectedProduct"></app-product-detail>
+<!-- <app-messages></app-messages> -->

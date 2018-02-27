@@ -51,26 +51,17 @@ export class ProductService {
 
   // Simulate GET /products from the server.
   get products(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.productsUrl)
-    .pipe(
+    return this.http.get<Product[]>(this.productsUrl).pipe(
       tap(products => this.log(`Fetched products`)),
       catchError(this.handleError('Get products from server', []))
     );
-  }
-
-  // Toggle checked status.
-  toggleCheckedStatus(product: Product): Product {
-    const updatedProduct = this.update(product.id, {
-      isChecked: !product.isChecked
-    });
-    return updatedProduct;
   }
 
   // Simulate POST /product.
   add(product: Product): Observable<Product> {
     return this.http.post<Product>(this.productsUrl, product, httpOptions).pipe(
       tap((newProduct: Product) => this.log(`Added product with id=${newProduct.id}`)),
-      catchError(this.handleError<Product>('Add product'))
+      catchError(this.handleError<Product>('Add product failed'))
     );
   }
 
@@ -79,35 +70,26 @@ export class ProductService {
     const url = `${this.productsUrl}/${id}`;
     return this.http.get<Product>(url).pipe(
       tap(_ => this.log(`Fetched product id=${id}`)),
-      catchError(this.handleError<Product>(`Get product id=${id}`))
+      catchError(this.handleError<Product>(`Get product id=${id} failed`))
     );
   }
 
   // Simulate DELETE /product/:id
   delete(id: number): Observable<Product> {
     const url = `${this.productsUrl}/${id}`;
+
     return this.http.delete<Product>(url, httpOptions).pipe(
       tap(_ => this.log(`Deleted product id=${id}`)),
-      catchError(this.handleError<Product>('Deleted Product'))
+      catchError(this.handleError<Product>('Deleted Product failed'))
     );
   }
 
   // Simulate PUT /product/:id
-  update(id: number, values: Object = {}): Product {
-    // REMOVE THIS!!
-    const product = new Product({title: 'REMOVE ME REFACOR!!', id: 100});
-    if (!product) {
-      return null;
-    }
-    Object.assign(product, values);
-    return product;
-  }
-
-  // Sinitize any given string.
-  // making sure the string is valid.
-  sinitizeString(value: string): string | null {
-    const cleanValue = value.trim();
-    return cleanValue.length ? cleanValue : null;
+  update(product: Product): Observable<any> {
+    return this.http.put(this.productsUrl, product, httpOptions).pipe(
+      tap(_ => this.log(`updated product id=${product.id}`)),
+      catchError(this.handleError<any>('Updated product failed'))
+    );
   }
 
 }

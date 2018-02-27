@@ -23,12 +23,18 @@ export class ProductsComponent implements OnInit {
   // The current selected product.
   selectedProduct: Product | null = null;
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService) { }
 
   ngOnInit() {
     // Get all exisiting products.
     this.productService.products.subscribe(products => this.products = products);
   }
+
+  // Get all products.
+  // getAll() {
+  //   this.productService.products.subscribe(products => this.products = products);
+  // }
+
 
   // Set editor to "add" or "Edit" mode.
   setEditorMode(product?: Product): void {
@@ -52,19 +58,41 @@ export class ProductsComponent implements OnInit {
     return true;
   }
 
+  // Get product.
   get(id: number): void {
     this.productService.get(id)
       .subscribe(product => this.selectedProduct = product);
   }
 
+  // Add product.
   add(product: Product): void {
     product.title = product.title.trim();
-    if (!product.title) { return; }
+    // Exit eraly in case title is empty
+    if (!product.title) {
+      return;
+    }
+
     this.productService.add(product)
       .subscribe(newProduct => {
         this.products.push(newProduct);
         this.resetEditor();
       });
+  }
+
+  // Update product.
+  update(): void {
+    this.productService.update(this.selectedProduct).subscribe();
+  }
+
+  // Toggle the product "checked" status.
+  toggleCheckedStatus(product: Product): void {
+    this.productService.update(product).subscribe(_ => this.resetEditor());
+  }
+
+  // Delete product.
+  delete(id: number): void {
+    this.products = this.products.filter(prduct => id !== prduct.id);
+    this.productService.delete(id).subscribe();
   }
 
   // Reset the editor.
@@ -74,32 +102,5 @@ export class ProductsComponent implements OnInit {
     this.selectedProduct = null;
     this.editorMode = false;
   }
-
-  // Update product.
-  update(product: Product): void {
-    const newTitle = this.productService.sinitizeString(product.title);
-    // Exit early in case title is empty
-    if (!newTitle) {
-      return;
-    }
-    this.productService.update(product.id, {title: newTitle});
-  }
-
-  // Toggle the product "checked" status.
-  toggleCheckedStatus(product: Product): void {
-    this.productService.toggleCheckedStatus(product);
-    this.resetEditor();
-  }
-
-  // Delete product.
-  delete(id: number): void {
-    this.products = this.products.filter(prduct => id !== prduct.id);
-    this.productService.delete(id).subscribe();
-  }
-
-  // delete(hero: Hero): void {
-  //   this.heroes = this.heroes.filter(h => h !== hero);
-  //   this.heroService.deleteHero(hero).subscribe();
-  // }
 
 }

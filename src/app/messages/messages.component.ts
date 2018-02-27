@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { MessageService } from './../services/message/message.service';
 
+import { environment } from './../../environments/environment';
 
 @Component({
   selector: 'app-messages',

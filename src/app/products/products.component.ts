@@ -57,6 +57,13 @@ export class ProductsComponent implements OnInit {
 
   // Update product.
   update(produt: Product): void {
+
+  /* @TODO [Preformence]
+   * Change update of procut title to use "Observable" and "debounceTime"
+   * reduce request to the server on every key stroke, send request
+   * only when the user actually stpoed typing or just add a "save"
+   * button instead.
+  */
     this.productService.update(produt).subscribe();
   }
 
